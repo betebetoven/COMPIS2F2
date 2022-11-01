@@ -74,7 +74,13 @@ char name8          = '${111}';
  int operaciones1Avanzadas3  = (30 ^ [2]) + (2);   
  int operaciones1Avanzadas4  = (30 ^ [10-8+9-4*2-1]) + (2) ;  
  int operaciones1Avanzadas5  = 30 ^ [10-8+9-4*2-1] + (2) ;  
- int operaciones1Avanzadas6  = (5*8) % (1+5+6);  
+ int operaciones1Avanzadas6  = (5*8) % (1+5+6); 
+ PRINT("ALAVERGA");
+ int bebe = (a++); //SIEMPRE ENCERRAR LOS AUMENTOS EN PARENTESIS
+ A++;
+ A();
+ PRINT((A()));
+ PRINT(A(););
 
 
 

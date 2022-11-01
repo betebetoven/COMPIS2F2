@@ -175,15 +175,16 @@ INSTRUCCION : DECLARACION   { console.log("reconocio declaracion ") }
             | CONDICIONIF   { console.log("reconocio condicion if") } 
             | CICLO         {console.log("reconocio  ciclo")}
             | RETURN   {console.log("reconocio  RETURN")}
-            | CALL      {console.log("reconocio  LLAMADA")}
+            | CALL ';'     {console.log("reconocio  LLAMADA")}
             | SWITCH    {console.log("reconocio sentencia SWITCH")}
             | BREAK     {console.log("reconocio sentencia BREAK")}
             | CONTINUE     {console.log("reconocio sentencia CONTINUE")}
+            | AUMENTO ';'   {console.log("reconocio sentencia AUMENTO")}
             | error    ';'  { console.log("Error sintactico en la linea"+(yylineno+1)); }
 ;
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
-CICLO: 'pr_for'  '(' DECLARACION ETS ';'  ASIGNACION ')' '{' INSTRUCCIONES '}'  {}
-    | 'pr_for' '('  ASIGNACION ETS ';'  ASIGNACION   ')'  '{' INSTRUCCIONES '}'  {}
+CICLO: 'pr_for'  '(' DECLARACION ETS ';'  ETS ')' '{' INSTRUCCIONES '}'  {}
+    | 'pr_for' '('  ASIGNACION ETS ';'  ETS   ')'  '{' INSTRUCCIONES '}'  {}
     | 'pr_while' '(' ETS ')' '{' INSTRUCCIONES '}'  {}
     | 'pr_do' '{' INSTRUCCIONES '}' 'pr_while' '(' ETS ')' ';' {}
     | 'pr_do' '{' INSTRUCCIONES '}' 'pr_until' '(' ETS ')' ';' {}
@@ -256,8 +257,8 @@ RETURN : 'pr_return' '(' ETS ')' ';'
 ;
 
 //LLAMADA DE FUNCION O METODOS
-CALL:  E PARAMETROSLL ';'
-    |  E '('')'';'
+CALL:  E PARAMETROSLL 
+    |  E '('')'
 
 ;
 
@@ -297,8 +298,9 @@ DECLARACION : TIPO_DECLARACION_CONST  TIPODATO_DECLARACION IDS '=' ETS ';' {}
             ;
 DECLARACION_INTERNA : TIPODATO_DECLARACION IDS '=' ETS {}
             ;
-
-
+AUMENTO : E '+' '+'  {}
+        | E '-' '-'  {}
+;
 
 ETS :   '(' TIPODATO_DECLARACION ')'  ETS {}
         | 'pr_TL' '(' ETS ')'{}
@@ -329,9 +331,15 @@ COMP:  E '<' E {}
     |  E '!''=' E   {}
     |  E '=''=' E   {}
 ;
+
+
+
 E: E '+' Term {}
 |E '-' Term {}
 |'-' Term {}
+| AUMENTO {}
+//| E '-' '-' {}
+|CALL {}
 |Term  {}
 ;
 
@@ -347,6 +355,7 @@ Term: Term '*' Factor {}
 
 Factor: '(' E ')' 
     | F
+    
 ;
 F: expreR_numero {}
     |expreR_bool {}
