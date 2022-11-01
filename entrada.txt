@@ -1,0 +1,39 @@
+Println("Tengo 10 anios");
+Int edad = (Int) 186;
+int pedro  = 25*25;
+int jaja = (-15);
+int jaja = -150;
+int pepe = -(1);
+int jaja = (string)pepe^[25+8*2];
+switch( edad ) {
+Case 10:
+{
+Println("Tengo 10 anios.");
+}
+
+Case 18:
+{
+Print("Tengo 18 anios");
+
+Println("Tengo 25 anios");
+}
+
+Default:
+{
+Print("No se que edad tengo");
+}
+
+}
+Print("deberiajalarestotambien");
+if(a){print("mam me ama");}
+elif(a==b){print("mam me ama");}
+elif(a();){print("mam me ama");}
+elif(25*8<a && 8 > 10){print("mam me ama");}
+else{print("si funciono toda esta mamada.\n");}
+while(a){
+    print(a);
+}
+do{print(s);}while(k==none);
+do{print(s);}until(k==none);
+
+
