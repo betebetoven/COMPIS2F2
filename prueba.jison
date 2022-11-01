@@ -22,11 +22,11 @@
 %lex
 %options case-insensitive
 
-number [0-9]+
-//DecIntegerLiteral  
-//number (0 | [1-9][0-9]*)+"."? (0 | [1-9][0-9]*)?
+nunumber [0-9]+
+//DecIntegerLiteral  0 | [1-9][0-9]*
+number [0-9]+"."? [0-9]*
 cadena "\"" [^\"]* "\""
-//cadenita "\'" [^\"]* "\'"
+cadenita "'" [^']* "'"
 bool    "true"|"false"   
 
 %%
@@ -52,7 +52,7 @@ bool    "true"|"false"
 {number}    return 'expreR_numero'
 {cadena}    return 'expreR_cadena'
 {bool}      return 'expreR_bool'
-//{cadenita}  return 'expreR_cadenita'
+{cadenita}  return 'expreR_cadenita'
 
 
 
@@ -177,7 +177,8 @@ INSTRUCCION : DECLARACION   { console.log("reconocio declaracion ") }
             | RETURN   {console.log("reconocio  RETURN")}
             | CALL      {console.log("reconocio  LLAMADA")}
             | SWITCH    {console.log("reconocio sentencia SWITCH")}
-            | BREAK
+            | BREAK     {console.log("reconocio sentencia BREAK")}
+            | CONTINUE     {console.log("reconocio sentencia CONTINUE")}
             | error    ';'  { console.log("Error sintactico en la linea"+(yylineno+1)); }
 ;
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
@@ -196,9 +197,9 @@ OPCIONES: OPCIONES OPCION  {}
 OPCION : 'pr_case'  ETS  ':' '{' INSTRUCCIONES '}' {}
 ;
 
-BREAK: 'pr_break'
+BREAK: 'pr_break' ';' {}
 ;
-CONTINUE: 'pr_continue'
+CONTINUE: 'pr_continue' ';' {}
 ;
 
 
@@ -350,7 +351,7 @@ Factor: '(' E ')'
 F: expreR_numero {}
     |expreR_bool {}
     |expreR_cadena {}
-    //|expreR_cadenita()
+    |expreR_cadenita()
     | 'id' {}
 ;
 // INSSTRUCCION FOR

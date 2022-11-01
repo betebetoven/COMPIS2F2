@@ -36,4 +36,47 @@ while(a){
 do{print(s);}while(k==none);
 do{print(s);}until(k==none);
 
+ variable1       = 5;
+ variable2       = 50;   //ERROR sintactico, reportar que falta un punto y coma, recuperarse del error
+ v1, v2, v3  = "esta es una cadena";
+ curso1          = "olc";
+ curso2          = "olc";
+ curso3          = "olc";
+ pi1             = 3;
+ pi2             = 3.1;
+ pi3             = 3.14;
+ pi4             = 3.141;
+ anio1           = 1;
+ anio2           = 9;
+ anio3           = 4;
+ anio4           = 5;
+ variableNeg     = -5.0;
+string encabezado1 = "Universidad San Carlos de Guatemala...;";
+string encabezado2 = "Escuela de Ciencias y SistemasSegundo semestre";
+
+
+boolean flag1          = verdadero;
+boolean flag2          = falso;
+char name1         = 'f';
+char name2         = 'e';
+char name          = 'r';
+ char name4, name6 = 'n';
+char name5         = 'a';
+char name7          = '${100}';
+char name8          = '${111}';
+
+
+ DOUBLE operaciones1Basica      = 1+(1);               
+ int operaciones1Basica2      = operaciones1Basica + operaciones1Basica;                              
+ int operaciones1Intermedia  = 15+(9*8)+200/8*3+9;  
+ double operaciones1Avanzadas1  = ((15+9)*8+200/8*3+9);   
+ int operaciones1Avanzadas2  = 30 ^ [22.2-2.2] + (2);   
+ int operaciones1Avanzadas3  = (30 ^ [2]) + (2);   
+ int operaciones1Avanzadas4  = (30 ^ [10-8+9-4*2-1]) + (2) ;  
+ int operaciones1Avanzadas5  = 30 ^ [10-8+9-4*2-1] + (2) ;  
+ int operaciones1Avanzadas6  = (5*8) % (1+5+6);  
+
+
+
+
 
