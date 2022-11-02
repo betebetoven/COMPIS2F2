@@ -118,10 +118,10 @@ bool    "true"|"false"
 "^" return '^'
 "!" return '!'
 "%" return '%'
-"<=" return '<='
-">=" return '>='
-"==" return '=='
-"!=" return '!='
+//"<=" return '<='
+//">=" return '>='
+//"==" return '=='
+//"!=" return '!='
 "[" return '['
 "]" return ']'
 
@@ -180,17 +180,20 @@ INSTRUCCION : DECLARACION   { console.log("reconocio declaracion ") }
             | BREAK     {console.log("reconocio sentencia BREAK")}
             | CONTINUE     {console.log("reconocio sentencia CONTINUE")}
             | AUMENTO ';'   {console.log("reconocio sentencia AUMENTO")}
+            | INSTANCIA ';'   {console.log("reconocio sentencia INSTANCIA")}
             | error    ';'  { console.log("Error sintactico en la linea"+(yylineno+1)); }
 ;
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
 CICLO: 'pr_for'  '(' DECLARACION ETS ';'  ETS ')' '{' INSTRUCCIONES '}'  {}
     | 'pr_for' '('  ASIGNACION ETS ';'  ETS   ')'  '{' INSTRUCCIONES '}'  {}
+    |'pr_for'  '(' DECLARACION ETS ';'  ASIGNACION ')' '{' INSTRUCCIONES '}'  {}
+    | 'pr_for' '('  ASIGNACION ETS ';'  ASIGNACION   ')'  '{' INSTRUCCIONES '}'  {}
     | 'pr_while' '(' ETS ')' '{' INSTRUCCIONES '}'  {}
     | 'pr_do' '{' INSTRUCCIONES '}' 'pr_while' '(' ETS ')' ';' {}
     | 'pr_do' '{' INSTRUCCIONES '}' 'pr_until' '(' ETS ')' ';' {}
     ;
 
-SWITCH : 'pr_switch' '(' ETS ')' '{' OPCIONES 'pr_default' ':' '{' INSTRUCCIONES '}' '}' {}
+SWITCH : 'pr_switch' '(' 'id' ')' '{' OPCIONES 'pr_default' ':' '{' INSTRUCCIONES '}' '}' {}
 ;
 OPCIONES: OPCIONES OPCION  {}
             | OPCION  {}
@@ -225,17 +228,17 @@ IFANIDADOS : IFANIDADOS  'pr_elif' '(' ETS ')'  '{' INSTRUCCIONES '}' {}
 
 
 //FUNCIONES Y METODOS CON PARAMETROS
-FUNCION: E PARAMETROS ':'  TIPODATO_DECLARACION '{' BLOQUE '}'
+FUNCION: 'id' PARAMETROS ':'  TIPODATO_DECLARACION '{' INSTRUCCIONES '}'
 ;
-METODO : E PARAMETROS ':' 'pr_void'  '{' INSTRUCCIONES '}'
-        | E PARAMETROS   '{' INSTRUCCIONES '}'
+METODO : 'id' PARAMETROS ':' 'pr_void'  '{' INSTRUCCIONES '}'
+        | 'id' PARAMETROS   '{' INSTRUCCIONES '}'
 ;
 PARAMETROS : '(' PARS ')' 
 ;
-PARS : PARS ',' PAR 
+PARS : PARS ',' PAR
      | PAR          
 ;
-PAR : TIPODATO_DECLARACION E
+PAR : TIPODATO_DECLARACION  'id'
 ;
 PARAMETROSLL : '(' PARSLL ')' 
 ;
@@ -245,10 +248,10 @@ PARSLL : PARSLL ',' E
 
 //sin parametros
 
-FUNCIONsp: E  '(' ')' ':' TIPODATO_DECLARACION  '{' INSTRUCCIONES '}'
+FUNCIONsp: 'id'  '(' ')' ':' TIPODATO_DECLARACION  '{' INSTRUCCIONES '}'
 ;
-METODOsp : E '(' ')' ':' 'pr_void'  '{' INSTRUCCIONES '}' 
-        | E '(' ')'   '{' INSTRUCCIONES '}' 
+METODOsp : 'id' '(' ')' ':' 'pr_void'  '{' INSTRUCCIONES '}' 
+        | 'id' '(' ')'   '{' INSTRUCCIONES '}' 
 ;
 //EL RETURN
 
@@ -257,8 +260,8 @@ RETURN : 'pr_return' '(' ETS ')' ';'
 ;
 
 //LLAMADA DE FUNCION O METODOS
-CALL:  E PARAMETROSLL 
-    |  E '('')'
+CALL:  'id' PARAMETROSLL 
+    |  'id' '('')'
 
 ;
 
@@ -267,9 +270,9 @@ CALL:  E PARAMETROSLL
 
 //INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
 
-IMPRIMIR : 'pr_print' '(' ETS ')' ';'
+IMPRIMIR : 'pr_print'  ETS  ';'
 ;
-IMPRIMIRLN : 'pr_println' '(' ETS ')' ';'
+IMPRIMIRLN : 'pr_println'  ETS  ';'
 ;
 
 //BLOQUE DE INSTRUCCIONES
@@ -292,17 +295,17 @@ TIPODATO_DECLARACION  :  'pr_numero' {}
                        | 'pr_char' {}
                        ; 
 
-DECLARACION : TIPO_DECLARACION_CONST  TIPODATO_DECLARACION IDS '=' ETS ';' {}
-            |
-            TIPODATO_DECLARACION IDS '=' ETS ';'  {}
+DECLARACION : INSTANCIA  '=' ETS ';'  {}
             ;
-DECLARACION_INTERNA : TIPODATO_DECLARACION IDS '=' ETS {}
+INSTANCIA: TIPODATO_DECLARACION  IDS {}
+;
+DECLARACION_INTERNA : E IDS '=' ETS {}
             ;
-AUMENTO : E '+' '+'  {}
-        | E '-' '-'  {}
+AUMENTO : 'id' '+' '+'  {}
+        | 'id' '-' '-'  {}
 ;
 
-ETS :   '(' TIPODATO_DECLARACION ')'  ETS {}
+ETS :   /*'(' TIPODATO_DECLARACION ')'  ETS {}
         | 'pr_TL' '(' ETS ')'{}
         | 'pr_TU' '(' ETS ')'{}
         | 'pr_round' '(' ETS ')'{}
@@ -310,14 +313,14 @@ ETS :   '(' TIPODATO_DECLARACION ')'  ETS {}
         | 'pr_typeof' '(' ETS ')'{}
         | 'pr_TS' '(' ETS ')'{}
         | 'pr_TCA' '(' ETS ')'{}
-        | COMPARACIONES {}
+        | COMPARACIONES {}*/
         | E {}
-        | INSTRUCCION {}
+        //| INSTRUCCION {}
 ; 
 
 
-IDS : IDS ',' E{}
-    | E {}
+IDS : IDS ',' 'id' {}
+    | 'id' {}
     ;
 COMPARACIONES: '!' '(' COMPARACIONES ')' {}
             |  COMPARACIONES '&&' COMP {}
@@ -339,7 +342,7 @@ E: E '+' Term {}
 |'-' Term {}
 | AUMENTO {}
 //| E '-' '-' {}
-|CALL {}
+//|CALL {}
 |Term  {}
 ;
 
@@ -360,7 +363,18 @@ Factor: '(' E ')'
 F: expreR_numero {}
     |expreR_bool {}
     |expreR_cadena {}
-    |expreR_cadenita()
+    |expreR_cadenita() {}
+    |TIPODATO_DECLARACION {}
+    |CALL {}
+    | E  E {}
+    | 'pr_TL'  E {}
+    | 'pr_TU'  E {}
+    | 'pr_round'  E {}
+    | 'pr_len'  E {}
+    | 'pr_typeof'  E {}
+    | 'pr_TS'  E {}
+    | 'pr_TCA'  E {}
+    | COMPARACIONES {}
     | 'id' {}
 ;
 // INSSTRUCCION FOR

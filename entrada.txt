@@ -1,5 +1,18 @@
 Println("Tengo 10 anios");
-Int edad = (Int) 186;
+print(25);
+int edad,b,c =  (int)(186);
+int pedroso = a();
+int pedroso = (a());
+int pedroso = a++;
+int pedroso = (a++);
+STRING A,B,C;
+INT D;
+A = 2;
+B,C,D = "PAPITAS";
+BABA();
+BABA(2,3,4);
+Println("Tengo 10 anios");
+Int edad =  (186);
 int pedro  = 25*25;
 int jaja = (-15);
 int jaja = -150;
@@ -27,7 +40,7 @@ Print("No se que edad tengo");
 Print("deberiajalarestotambien");
 if(a){print("mam me ama");}
 elif(a==b){print("mam me ama");}
-elif(a();){print("mam me ama");}
+elif(a()){print("mam me ama");}
 elif(25*8<a && 8 > 10){print("mam me ama");}
 else{print("si funciono toda esta mamada.\n");}
 while(a){
@@ -35,7 +48,6 @@ while(a){
 }
 do{print(s);}while(k==none);
 do{print(s);}until(k==none);
-
  variable1       = 5;
  variable2       = 50;   //ERROR sintactico, reportar que falta un punto y coma, recuperarse del error
  v1, v2, v3  = "esta es una cadena";
@@ -64,10 +76,8 @@ char name          = 'r';
 char name5         = 'a';
 char name7          = '${100}';
 char name8          = '${111}';
-
-
- DOUBLE operaciones1Basica      = 1+(1);               
- int operaciones1Basica2      = operaciones1Basica + operaciones1Basica;                              
+DOUBLE operaciones1Basica      = 1+(1);               
+int operaciones1Basica2     = (operaciones1Basica) + aob2;                              
  int operaciones1Intermedia  = 15+(9*8)+200/8*3+9;  
  double operaciones1Avanzadas1  = ((15+9)*8+200/8*3+9);   
  int operaciones1Avanzadas2  = 30 ^ [22.2-2.2] + (2);   
@@ -76,13 +86,129 @@ char name8          = '${111}';
  int operaciones1Avanzadas5  = 30 ^ [10-8+9-4*2-1] + (2) ;  
  int operaciones1Avanzadas6  = (5*8) % (1+5+6); 
  PRINT("ALAVERGA");
- int bebe = (a++); //SIEMPRE ENCERRAR LOS AUMENTOS EN PARENTESIS
- A++;
+
+ int bebe = (a++); 
+ b++;
+  A++;
  A();
  PRINT((A()));
- PRINT(A(););
+ PRINT(A());
+ print(a());
+ print((a++));
+ a = a() +25 * 35 +x * 8^[25+x*a()];
+
+ boolean operacionRela1 = 5+5>5;
+boolean operacionRela3 = operaciones1Basica  > 8;
+boolean operacionRela3 = ((operaciones1Basica) +6) >= (8);
+boolean operacionRela3 = ((operaciones1Basica) +6) <= 8;
+boolean operacionRela4 = operaciones1Basica == 8;
+boolean operacionRela5 = operaciones1Basica == operaciones1Basica;
+boolean operacionRela6 = operaciones1Basica == (operaciones1Basica)+1;
+boolean operacionRela7 = peraciones1Basica == (operaciones1Basica)*(8+5);
+boolean operacionRela5 = operaciones1Basica != operaciones1Basica;
+
+boolean operLogica = c;
+boolean mama2mama2;
+
+
+ v1                          = "esta es la cadena numero 1";
+ v2 , v3                      = "estas cadenas deben ser diferentes";
+ curso1  ,  curso2  , curso3   = "Organizacion de lenguajes y compiladores 1";
+ curso1  ,  curso2  , curso3 =  "Organizacion de lenguajes y compiladores 1" ;   /******error sintactico, le falta la flecha*/ 
+               
+println encabezado1;
+println encabezado2;
+print  ("...");
+print (anio1);
+print (anio2 );
+print (anio3) ;
+print (anio4);
+println (".");
+println ((v3));
+
+
+if(varB){
+	println( "Estas definiendo bien los valores");
+	int varaux = variable1 % 2;
+	switch (varaux) 
+    {
+		case 0: {
+			imprimir_nl ("el valor es mayor a 0 y menos a 2");
+            }
+		case 2:{
+			imprimir_nl ("el valor es mayor a 2");
+            }
+            Default:
+            {
+        Print("No se que edad tengo");
+            }
+	}
+}
+
+
+potenciamahual(int base, int exponente)
+{
+	int i = 0;
+	int acumulado =  0;
+	for(i=0; i<(acumulado)-1;i++)
+    {
+		acumulado =  (acumulado) + acumulado;
+	}	
+	print(acumulado);
+	println(" Esta es la potencia Manual");	
+}
+potenciamahual2(int base, int exponente):void
+{
+	int i = 0;
+	int acumulado =  0;
+	for(int i=0; i<(acumulado)-1;i=(i)+1;)
+    {
+		acumulado =  (acumulado) + acumulado;
+	}	
+	print(acumulado);
+	println(" Esta es la potencia Manual");	
+}
+potenciamahual()
+{
+	int i = 0;
+	int acumulado =  0;
+	for(i=0; i<(acumulado)-1;i++)
+    {
+		acumulado =  (acumulado) + acumulado;
+	}	
+	print(acumulado);
+	println(" Esta es la potencia Manual");	
+}
+potenciamahual2():void
+{
+	int i = 0;
+	int acumulado =  0;
+	for(int i=0; i<(acumulado)-1;i=(i)+1;)
+    {
+		acumulado =  (acumulado) + acumulado;
+	}	
+	print(acumulado);
+	println(" Esta es la potencia Manual");	
+}
+potenciaFuncion(int base, int exponente): int
+{
+    print(potencia);
+	return(potencia);
+}
 
 
 
+potenciaFuncion (int base, int exponente): int
+{
+    int potencia =  base ^ [exponente];
+	return(potencia);
+}
 
+ metodo_1(): string{
+	println("estamos entrando al metodo 1");	
+	otenciaManual(3*1+4/2, 3+2);
+	print(potenciaFuncion(3*1+4/2, 3+2));
+	println(" Esta es la potencia Funcion");
+}
 
+metodo1();
