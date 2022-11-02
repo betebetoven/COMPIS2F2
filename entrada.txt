@@ -1,260 +1,283 @@
-Println("Tengo 10 anios");
-print(25);
-int edad,b,c =  (int)(186);
-int pedroso = a();
-int pedroso = (a());
-int pedroso = a++;
-int pedroso = (a++);
-STRING A,B,C;
-INT D;
-A = 2;
-B,C,D = "PAPITAS";
-BABA();
-BABA(2,3,4);
-Println("Tengo 10 anios");
-Int edad =  (186);
-int pedro  = 25*25;
-int jaja = (-15);
-int jaja = -150;
-int pepe = -(1);
-int jaja = (string)pepe^[25+8*2];
-switch( edad ) {
-Case 10:
-{
-Println("Tengo 10 anios.");
+/**
+
+    Organizacion de lenguajes y compiladores 1 
+    Segundo semestre 2022
+    Universidad San Carlos de Guatemala
+
+****/
+
+//Seccion de declaraciones
+
+int varible1;
+double varible2;
+boolean varible3;
+char varible4;
+string varible5;
+int varible1, varible11;
+double varible2, varible22;
+boolean varible3, varible33;
+char varible4, varible44;
+char variableCHARARRAY = toCharArray("ESTA es LA VariaBle Moises: Aver que TAL");
+string varible5, varible55;
+int var1 = 12;
+int tm1,tmp2,tmp3,tmp4 = 12+5;
+double var2 = 15.02;
+double var21 = 2022.00;
+double var22 = 0.10;
+double var23 = 1.0;
+double var24 = 51.1589462625459;
+boolean var3 = true;
+boolean var31 = false;
+char var41 = 'a';
+char var42 = '2';
+char var43 = 'W';
+char var44 = '@';
+char var45 = '!';
+char var46 = '%';
+char var47 = '/';
+string var51 = "Hola";
+string var52 = "Mundo";
+string var53 = "este es un mensaje @";
+string var54 = "Organizacion de lenguajes y compiladores1";
+string var55 = "Compiladores\n1";
+//string var56 = "Compiladores\\1\\";
+string var57 = "compiladores\'1\'";
+string var58 = "\tCompiladores 1";
+string var59 = "\'compiladores 1\'";
+
+//Seccion de asignaciones
+var1= (1)+2-3+4-5+6-7+8-9;
+var1= (1+2+3+4)+(5+6+7+8+9);
+var1= -1+2*3+4*8/8%(5789);
+
+var3= 5+5-8+6*8+1/7%9>45+6;
+var3= 6+4-7+9*8*9/7%9<45+6;
+var3= (7+3)-8+6*8+6/7%9>=45+6;
+var3= 8+2-7+9*8-9/7%9<=45+6;
+
+//Casteos
+int v5= (int)"hola";
+string v1= (string)12%8;
+char v3= (char)true;
+char v4= (char)'A';
+
+
+division():string{
+    string v2= (string)12.25+1.20;
+    string v3= (string)true;
+    string v4= (string)'A';
+    return ("olc1");
+    mivar= tolower("QWERT"+" ")+"1+5";
+    mivar= toupper("QWERT"+" ")+"hola!";
+    boolean v2= (boolean)12.25;   
+    string a1=typeof(15);
+    string a2=typeof(15+6.5);
+    string a3=typeof('a');
+    string a4=typeof(true);
+    string a5=typeof("dsafdsa");
+    string a5=tostring("melmv");
+    string a5=tostring(15);
+    string a5=tostring(15.23+9.02);
+    string a5=tostring(true);
 }
 
-Case 18:
-{
-Print("Tengo 18 anios");
-
-Println("Tengo 25 anios");
-}
-
-Default:
-{
-Print("No se que edad tengo");
-}
-
-}
-Print("deberiajalarestotambien");
-if(a){print("mam me ama");}
-elif(a==b){print("mam me ama");}
-elif(a()){print("mam me ama");}
-elif(25*8<a && 8 > 10){print("mam me ama");}
-else{print("si funciono toda esta mamada.\n");}
-while(a){
-    print(a);
-}
-do{print(s);}while(k==none);
-do{print(s);}until(k==none);
- variable1       = 5;
- variable2       = 50;   //ERROR sintactico, reportar que falta un punto y coma, recuperarse del error
- v1, v2, v3  = "esta es una cadena";
- curso1          = "olc";
- curso2          = "olc";
- curso3          = "olc";
- pi1             = 3;
- pi2             = 3.1;
- pi3             = 3.14;
- pi4             = 3.141;
- anio1           = 1;
- anio2           = 9;
- anio3           = 4;
- anio4           = 5;
- variableNeg     = -5.0;
-string encabezado1 = "Universidad San Carlos de Guatemala...;";
-string encabezado2 = "Escuela de Ciencias y SistemasSegundo semestre";
 
 
-boolean flag1          = verdadero;
-boolean flag2          = falso;
-char name1         = 'f';
-char name2         = 'e';
-char name          = 'r';
- char name4, name6 = 'n';
-char name5         = 'a';
-char name7          = '${100}';
-char name8          = '${111}';
-DOUBLE operaciones1Basica      = 1+(1);               
-int operaciones1Basica2     = (operaciones1Basica) + aob2;                              
- int operaciones1Intermedia  = 15+(9*8)+200/8*3+9;  
- double operaciones1Avanzadas1  = ((15+9)*8+200/8*3+9);   
- int operaciones1Avanzadas2  = 30 ^ [22.2-2.2] + (2);   
- int operaciones1Avanzadas3  = (30 ^ [2]) + (2);   
- int operaciones1Avanzadas4  = (30 ^ [10-8+9-4*2-1]) + (2) ;  
- int operaciones1Avanzadas5  = 30 ^ [10-8+9-4*2-1] + (2) ;  
- int operaciones1Avanzadas6  = (5*8) % (1+5+6); 
- PRINT("ALAVERGA");
-
- int bebe = (a++); 
- b++;
-  A++;
- A();
- PRINT((A()));
- PRINT(A());
- print(a());
- print((a++));
- a = a() +25 * 35 +x * 8^[25+x*a()];
-
- boolean operacionRela1 = 5+5>5;
-boolean operacionRela3 = operaciones1Basica  > 8;
-boolean operacionRela3 = ((operaciones1Basica) +6) >= (8);
-boolean operacionRela3 = ((operaciones1Basica) +6) <= 8;
-boolean operacionRela4 = operaciones1Basica == 8;
-boolean operacionRela5 = operaciones1Basica == operaciones1Basica;
-boolean operacionRela6 = operaciones1Basica == (operaciones1Basica)+1;
-boolean operacionRela7 = peraciones1Basica == (operaciones1Basica)*(8+5);
-boolean operacionRela5 = operaciones1Basica != operaciones1Basica;
-
-boolean operLogica = c;
-boolean mama2mama2;
-
-
- v1                          = "esta es la cadena numero 1";
- v2 , v3                      = "estas cadenas deben ser diferentes";
- curso1  ,  curso2  , curso3   = "Organizacion de lenguajes y compiladores 1";
- curso1  ,  curso2  , curso3 =  "Organizacion de lenguajes y compiladores 1" ;   /******error sintactico, le falta la flecha*/ 
-               
-println encabezado1;
-println encabezado2;
-print  ("...");
-print (anio1);
-print (anio2 );
-print (anio3) ;
-print (anio4);
-println (".");
-println ((v3));
-
-
-if(varB){
-	println( "Estas definiendo bien los valores");
-	int varaux = variable1 % 2;
-	switch (varaux) 
-    {
-		case 0: {
-			imprimir_nl ("el valor es mayor a 0 y menos a 2");
+Multiplicacion(int numero1, int numero2):int{
+    if(Universidad=="usac"){
+        var1= -1+2*3+4*8/8^[2];
+        var2=1.2+78.1+89.000;
+        double  val1= round(5.800);
+        val1= round(5.800+1.2+0.5);
+        println("tricentenadira");
+        if(Universidad=="usac"){
+            println("tricentenadira");
+            if(Universidad=="usac"){
+                println("tricentenadira");
+                if(Universidad=="usac"){
+                    println("tricentenadira");
+                    char v1= (char)12;
+                    char v2= (char)12.25;
+                }
             }
-		case 2:{
-			imprimir_nl ("el valor es mayor a 2");
-            }
-            Default:
-            {
-        Print("No se que edad tengo");
-            }
+        }
+    }
+
+	//este es otro if pero con condicion logica
+    if(anio==2022+22 || semestre=="Segundo"||4>2){
+        println("Usac!!!!");
+        boolean v5= (boolean)"hola";
+        if(var1>= var2){
+            println("Usac!!!!");
+            char v5= (char)"hola";
+        }   
+    }else{
+        var1= 1+(var1++);
+        println("sale en otro semestre :( ");
+    }
+
+
+	
+	 //otra condicion booleanda
+    if( suma(1,2)==3 && 45+56==12){
+        println("Esta bien");
+        var1--;
+    }elif(suma(1,3)==4|| "Universidad"=="usac"){
+        println("Esta es otra suma");
+        boolean v4= (boolean)'A';
+        //vector1.pop(); AGREEEEEEEEEEEEGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR POOOOOOOOOOOOOOOOP
+    }elif(suma(1,4)==4+1){
+        //edades.push(50-89*4);AGREGAR PUSHHHHH AAAAAAAAAAAAAAAAAAAAAAAA
+        println("Esta es otra suma");
+        //lista.pop();AGREGAR POOOOOOP AAAAAAAAAAAAAAAAAAA
+        switch(edad){
+            case 18: 
+			{
+                println("mayoria de eddad en guatemala");
+                string v5= (string)"hola"+" usac";
+                break;
+				}
+            case /*Este mensaje no tendria que dar error porque se omite desde el anlaisis lexico*/ 21:
+                // Este es la mayoria de edad en otro pais
+				{
+                println("mayoria de edad en us");
+                int v1= (int)12+1;
+                break;
+				}
+            default:
+			{
+                //instrucciones si no se da a complir la conidcion
+                //var3 = ("usac"=="usac")? 1:4+5;
+				int var3 ;
+				if ("usac"=="usac")
+				{
+					var3 = 1;
+				}
+				else
+				{
+					var3 = 4+5;
+				}
+				int var23 ;
+				if ("usac"=="usac")
+				{
+					var23 = 1;
+				}
+				else
+				{
+					var23	= 4+5;
+				}
+                //int var23 = ("usac"=="usac")? 1:4+5;
+                break;
+				}
+        }
+    }
+    boolean v1= (boolean)((12*8)+(5*8));
+    string resultado=numero1*numero2;
+    return (resultado);
+    return (4+5*8/9-18/1+1);
+    //edades.pop();AGREGAAAAAAAAAR POOOOOOOOOOOP AAAAAAAAAAAAAAAAAAAA
+}
+
+
+
+
+
+saludo(String nombre):void{
+    do {
+        do {
+            var3= "compi 1 "+" usac" != "compi "+"1";
+           // var3 = (5+6>48)? 1+1:45;   
+			if (5+6>48)
+			{
+				var3 = 1+1;
+
+			}
+			else 
+			{
+				var3 = 45;
+			}
+            do {
+                while(edad<100){
+                    var1--;
+                    println("Hola "+nombre);
+                    println("Segundo semestre 2022");
+                    var1++;
+                    edad++;
+                    //otra condicion booleanda
+                    if( suma(1,2)==3 && 45+56==12){
+                        println("Esta bien");
+                        var1--;
+                    }elif(suma(1,3)==4 || "Universidad"=="usac"){
+                        println("Esta es otra suma");
+                        boolean v4= (boolean)'A';
+                    }elif(suma(1,4)>4+1){
+                        println("Esta es otra suma");
+                    }else{
+                        var1++;
+                        //articulos.pop();AGREGAAAAAAAAAAAAAAAAAAAAR POOOOOOOOOOOOOOOOOOOOP
+                        boolean v3= (boolean)true==true;
+                    }
+                }
+                for (int x=0; x<45+8;(x++)){
+                    //var3 = (5+6>48+9/8)? 1:4+5;
+					if (5+6>48+9/8)
+						{
+							var3 = 1+1;
+
+						}
+						else 
+						{
+							var3 = 45;
+						}
+                    continue;
+                    //edades.push(1+50);AGERGAAAAAAAAAAAAAAAAR PUUUUUUUUUUUUUUUUUUUUUUUSHHHHHHHHHHH
+                    println("Hola mundo!!!");
+                }
+                for (x=0; x>=45+8;x=(x)+2;){
+                    int v2= (int)12.25;
+                    int v3= (int)true;
+                    int v4= (int)'A';
+                     for (x=0; x>=45+8;x=(x)+2;){
+                        int v2= (int)12.25;
+                        int v3= (int)true;
+                        int v4= (int)'A';
+                        continue;
+                    }
+                }
+            } while(lenguaje=="Type"+"Script");
+    } while(lenguaje=="Type"+"Script");
+   } until(lenguaje=="Type"+"Script");
+}
+
+ImprimirArrayCiclico():void{
+	for(int i=0; i<length(variableCHARARRAY); (i++)){
+		println("letra: "+ variableCHARARRAY[(i)+1]);
 	}
 }
-
-
-potenciamahual(int base, int exponente)
-{
-	int i = 0;
-	int acumulado =  0;
-	for(i=0; i<(acumulado)-1;i++)
-    {
-		acumulado =  (acumulado) + acumulado;
-	}	
-	print(acumulado);
-	println(" Esta es la potencia Manual");	
-}
-potenciamahual2(int base, int exponente):void
-{
-	int i = 0;
-	int acumulado =  0;
-	for(int i=0; i<(acumulado)-1;i=(i)+1;)
-    {
-		acumulado =  (acumulado) + acumulado;
-	}	
-	print(acumulado);
-	println(" Esta es la potencia Manual");	
-}
-potenciamahual()
-{
-	int i = 0;
-	int acumulado =  0;
-	for(i=0; i<(acumulado)-1;i++)
-    {
-		acumulado =  (acumulado) + acumulado;
-	}	
-	print(acumulado);
-	println(" Esta es la potencia Manual");	
-}
-potenciamahual2():void
-{
-	int i = 0;
-	int acumulado =  0;
-	for(int i=0; i<(acumulado)-1;i=(i)+1;)
-    {
-		acumulado =  (acumulado) + acumulado;
-	}	
-	print(acumulado);
-	println(" Esta es la potencia Manual");	
-}
-potenciaFuncion(int base, int exponente): int
-{
-    print(potencia);
-	return(potencia);
-}
-
-
-
-potenciaFuncion (int base, int exponente): int
-{
-    int potencia =  base ^ [exponente];
-	return(potencia);
-}
-
- metodo_1(): string{
-	println("estamos entrando al metodo 1");	
-	otenciaManual(3*1+4/2, 3+2);
-	print(potenciaFuncion(3*1+4/2, 3+2));
-	println(" Esta es la potencia Funcion");
-}
-
-metodo1();
-
-
-Int [ ] vector1 = new Int[4]; //se crea un vector de 4 posiciones, con 0 en cada posición
-Char [ ][ ] vectorDosd = new Char [(Int) "4"] [4] ; // se crea un vector de dos dimensionesde 4x4
-//Ejemplo de declaración tipo 2
-String [ ] vector2 = {"hola", "Mundo"}; 
-String [ ] vector2 = {"hola", "Mundo"};
-Char [ ][ ] vectordosd2 = {{0,0},{0,0}}; 
-z = a[25];
-x = a[250]+25^[a[(i)+1]];
-pepe = tostring(x)+"holahola";
-pepe = tostring(x[2][4])+"holahola";
-x[2][4] = a;
-x[2]= (b)+25.0;
-
-String [ ] vector2 = {"hola", "Mundo"}; //vector de 2 posiciones, con "Hola" y "Mundo"
-Int [ ] vectorNumero = {2020,2021,2022};
-vector2[1] = "OLC1 ";
-vector2[2] = "2do Semestre "+vectorNumero[2];
-
-while (x<100){
-if (x > 50)
-	{
-		Print("Mayor que 50");
-		//Más sentencias
+fibonaccirecursivo(int valor): int{
+	if(valor < 2){
+		return (valor);
 	}
-else
-	{
-		Print("Menor que 100");
-		//Más sentencias
-	} 
-X++;
-//Más sentencias
+	return (fibonaccirecursivo((valor)-1) + fibonaccirecursivo((valor)-2));
 }
 
-
-for ( int i=0; i<3;(i++) ){
-Println("i="+i);
-//más sentencias
+fibonacciciclico(int valor): int{
+	int actual = 0;
+	int siguiente = 1;
+	int temporal = 0;
+	for(int i = 0; i<(posicion)+1; (i++)){
+		printls(actual);
+		temporal = actual;
+		actual = siguiente;
+		siguiente = (siguiente) + temporal;
+	}
+	return (temporal);
 }
+ImprimirArrayCiclico();
+println("Fibonacci Recursivo: "+fibonaccirecursivo(5));
+println("Fibonacci Cicloco: "+fibonacciciclico(5));
+Multiplicacion(1+1,58/8);
+var3= "compi 1 "== "compi "+"1";
 
-for ( i=5; i>2;i=(i)-1; ){
-Print("i="+(i)+"\n");
-//más sentencias
-}
-boolean papa = false;
+holamundo();
+//run main();
