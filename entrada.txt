@@ -212,3 +212,11 @@ potenciaFuncion (int base, int exponente): int
 }
 
 metodo1();
+
+
+Int [ ] vector1 = new Int[4]; //se crea un vector de 4 posiciones, con 0 en cada posición
+Char [ ][ ] vectorDosd = new Char [(Int) "4"] [4] ; // se crea un vector de dos dimensionesde 4x4
+//Ejemplo de declaración tipo 2
+String [ ] vector2 = {"hola", "Mundo"}; 
+String [ ] vector2 = {"hola", "Mundo"};
+Char [ ][ ] vectordosd2 = {{0,0},{0,0}}; 

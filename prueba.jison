@@ -93,6 +93,7 @@ bool    "true"|"false"
 "length" return 'pr_len'
 "tostring" return 'pr_TS'
 "tochararray" return 'pr_TCA'
+"new" return 'pr_new'
 
 
 
@@ -181,6 +182,7 @@ INSTRUCCION : DECLARACION   { console.log("reconocio declaracion ") }
             | CONTINUE     {console.log("reconocio sentencia CONTINUE")}
             | AUMENTO ';'   {console.log("reconocio sentencia AUMENTO")}
             | INSTANCIA ';'   {console.log("reconocio sentencia INSTANCIA")}
+            |DECLARACION_VECTORES {console.log("reconocio sentencia DECLARACION VECTOR")}
             | error    ';'  { console.log("Error sintactico en la linea"+(yylineno+1)); }
 ;
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
@@ -266,8 +268,14 @@ CALL:  'id' PARAMETROSLL
 ;
 
 
+LISTADEPARSLL: LISTADEPARSLL ',' PARALISTA {}
+            | PARALISTA {}
+;
+PARALISTA : '{' PARSLL '}' {}
 
-
+;
+LISTADELISTAS : '{' LISTADEPARSLL '}' {}
+;
 //INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
 
 IMPRIMIR : 'pr_print'  ETS  ';'
@@ -297,6 +305,11 @@ TIPODATO_DECLARACION  :  'pr_numero' {}
 
 DECLARACION : INSTANCIA  '=' ETS ';'  {}
             ;
+DECLARACION_VECTORES:TIPODATO_DECLARACION '[' ']' 'id' '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']'';'
+                    |TIPODATO_DECLARACION '[' ']' '[' ']' 'id' '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']' '[' ETS ']' ';'
+                    |TIPODATO_DECLARACION '[' ']' 'id' '=' PARALISTA ';'
+                    ||TIPODATO_DECLARACION '[' ']' '[' ']' 'id' '=' LISTADELISTAS ';'
+;
 INSTANCIA: TIPODATO_DECLARACION  IDS {}
 ;
 DECLARACION_INTERNA : E IDS '=' ETS {}
