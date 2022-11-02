@@ -51,7 +51,7 @@ cadenita "'" [^']* "'"
 
 {number}    return 'expreR_numero'
 {cadena}    return 'expreR_cadena'
-{bool}      return 'expreR_bool'
+//{bool}      return 'expreR_bool'
 {cadenita}  return 'expreR_cadenita'
 
 
@@ -377,7 +377,6 @@ Factor: '(' E ')'
     
 ;
 F: expreR_numero {}
-    |expreR_bool {}
     | 'true' {}
     | 'false' {}
     |expreR_cadena {}

@@ -1,4 +1,260 @@
 Println("Tengo 10 anios");
 print(25);
 int edad,b,c =  (int)(186);
-int pedroso = a;
+int pedroso = a();
+int pedroso = (a());
+int pedroso = a++;
+int pedroso = (a++);
+STRING A,B,C;
+INT D;
+A = 2;
+B,C,D = "PAPITAS";
+BABA();
+BABA(2,3,4);
+Println("Tengo 10 anios");
+Int edad =  (186);
+int pedro  = 25*25;
+int jaja = (-15);
+int jaja = -150;
+int pepe = -(1);
+int jaja = (string)pepe^[25+8*2];
+switch( edad ) {
+Case 10:
+{
+Println("Tengo 10 anios.");
+}
+
+Case 18:
+{
+Print("Tengo 18 anios");
+
+Println("Tengo 25 anios");
+}
+
+Default:
+{
+Print("No se que edad tengo");
+}
+
+}
+Print("deberiajalarestotambien");
+if(a){print("mam me ama");}
+elif(a==b){print("mam me ama");}
+elif(a()){print("mam me ama");}
+elif(25*8<a && 8 > 10){print("mam me ama");}
+else{print("si funciono toda esta mamada.\n");}
+while(a){
+    print(a);
+}
+do{print(s);}while(k==none);
+do{print(s);}until(k==none);
+ variable1       = 5;
+ variable2       = 50;   //ERROR sintactico, reportar que falta un punto y coma, recuperarse del error
+ v1, v2, v3  = "esta es una cadena";
+ curso1          = "olc";
+ curso2          = "olc";
+ curso3          = "olc";
+ pi1             = 3;
+ pi2             = 3.1;
+ pi3             = 3.14;
+ pi4             = 3.141;
+ anio1           = 1;
+ anio2           = 9;
+ anio3           = 4;
+ anio4           = 5;
+ variableNeg     = -5.0;
+string encabezado1 = "Universidad San Carlos de Guatemala...;";
+string encabezado2 = "Escuela de Ciencias y SistemasSegundo semestre";
+
+
+boolean flag1          = verdadero;
+boolean flag2          = falso;
+char name1         = 'f';
+char name2         = 'e';
+char name          = 'r';
+ char name4, name6 = 'n';
+char name5         = 'a';
+char name7          = '${100}';
+char name8          = '${111}';
+DOUBLE operaciones1Basica      = 1+(1);               
+int operaciones1Basica2     = (operaciones1Basica) + aob2;                              
+ int operaciones1Intermedia  = 15+(9*8)+200/8*3+9;  
+ double operaciones1Avanzadas1  = ((15+9)*8+200/8*3+9);   
+ int operaciones1Avanzadas2  = 30 ^ [22.2-2.2] + (2);   
+ int operaciones1Avanzadas3  = (30 ^ [2]) + (2);   
+ int operaciones1Avanzadas4  = (30 ^ [10-8+9-4*2-1]) + (2) ;  
+ int operaciones1Avanzadas5  = 30 ^ [10-8+9-4*2-1] + (2) ;  
+ int operaciones1Avanzadas6  = (5*8) % (1+5+6); 
+ PRINT("ALAVERGA");
+
+ int bebe = (a++); 
+ b++;
+  A++;
+ A();
+ PRINT((A()));
+ PRINT(A());
+ print(a());
+ print((a++));
+ a = a() +25 * 35 +x * 8^[25+x*a()];
+
+ boolean operacionRela1 = 5+5>5;
+boolean operacionRela3 = operaciones1Basica  > 8;
+boolean operacionRela3 = ((operaciones1Basica) +6) >= (8);
+boolean operacionRela3 = ((operaciones1Basica) +6) <= 8;
+boolean operacionRela4 = operaciones1Basica == 8;
+boolean operacionRela5 = operaciones1Basica == operaciones1Basica;
+boolean operacionRela6 = operaciones1Basica == (operaciones1Basica)+1;
+boolean operacionRela7 = peraciones1Basica == (operaciones1Basica)*(8+5);
+boolean operacionRela5 = operaciones1Basica != operaciones1Basica;
+
+boolean operLogica = c;
+boolean mama2mama2;
+
+
+ v1                          = "esta es la cadena numero 1";
+ v2 , v3                      = "estas cadenas deben ser diferentes";
+ curso1  ,  curso2  , curso3   = "Organizacion de lenguajes y compiladores 1";
+ curso1  ,  curso2  , curso3 =  "Organizacion de lenguajes y compiladores 1" ;   /******error sintactico, le falta la flecha*/ 
+               
+println encabezado1;
+println encabezado2;
+print  ("...");
+print (anio1);
+print (anio2 );
+print (anio3) ;
+print (anio4);
+println (".");
+println ((v3));
+
+
+if(varB){
+	println( "Estas definiendo bien los valores");
+	int varaux = variable1 % 2;
+	switch (varaux) 
+    {
+		case 0: {
+			imprimir_nl ("el valor es mayor a 0 y menos a 2");
+            }
+		case 2:{
+			imprimir_nl ("el valor es mayor a 2");
+            }
+            Default:
+            {
+        Print("No se que edad tengo");
+            }
+	}
+}
+
+
+potenciamahual(int base, int exponente)
+{
+	int i = 0;
+	int acumulado =  0;
+	for(i=0; i<(acumulado)-1;i++)
+    {
+		acumulado =  (acumulado) + acumulado;
+	}	
+	print(acumulado);
+	println(" Esta es la potencia Manual");	
+}
+potenciamahual2(int base, int exponente):void
+{
+	int i = 0;
+	int acumulado =  0;
+	for(int i=0; i<(acumulado)-1;i=(i)+1;)
+    {
+		acumulado =  (acumulado) + acumulado;
+	}	
+	print(acumulado);
+	println(" Esta es la potencia Manual");	
+}
+potenciamahual()
+{
+	int i = 0;
+	int acumulado =  0;
+	for(i=0; i<(acumulado)-1;i++)
+    {
+		acumulado =  (acumulado) + acumulado;
+	}	
+	print(acumulado);
+	println(" Esta es la potencia Manual");	
+}
+potenciamahual2():void
+{
+	int i = 0;
+	int acumulado =  0;
+	for(int i=0; i<(acumulado)-1;i=(i)+1;)
+    {
+		acumulado =  (acumulado) + acumulado;
+	}	
+	print(acumulado);
+	println(" Esta es la potencia Manual");	
+}
+potenciaFuncion(int base, int exponente): int
+{
+    print(potencia);
+	return(potencia);
+}
+
+
+
+potenciaFuncion (int base, int exponente): int
+{
+    int potencia =  base ^ [exponente];
+	return(potencia);
+}
+
+ metodo_1(): string{
+	println("estamos entrando al metodo 1");	
+	otenciaManual(3*1+4/2, 3+2);
+	print(potenciaFuncion(3*1+4/2, 3+2));
+	println(" Esta es la potencia Funcion");
+}
+
+metodo1();
+
+
+Int [ ] vector1 = new Int[4]; //se crea un vector de 4 posiciones, con 0 en cada posición
+Char [ ][ ] vectorDosd = new Char [(Int) "4"] [4] ; // se crea un vector de dos dimensionesde 4x4
+//Ejemplo de declaración tipo 2
+String [ ] vector2 = {"hola", "Mundo"}; 
+String [ ] vector2 = {"hola", "Mundo"};
+Char [ ][ ] vectordosd2 = {{0,0},{0,0}}; 
+z = a[25];
+x = a[250]+25^[a[(i)+1]];
+pepe = tostring(x)+"holahola";
+pepe = tostring(x[2][4])+"holahola";
+x[2][4] = a;
+x[2]= (b)+25.0;
+
+String [ ] vector2 = {"hola", "Mundo"}; //vector de 2 posiciones, con "Hola" y "Mundo"
+Int [ ] vectorNumero = {2020,2021,2022};
+vector2[1] = "OLC1 ";
+vector2[2] = "2do Semestre "+vectorNumero[2];
+
+while (x<100){
+if (x > 50)
+	{
+		Print("Mayor que 50");
+		//Más sentencias
+	}
+else
+	{
+		Print("Menor que 100");
+		//Más sentencias
+	} 
+X++;
+//Más sentencias
+}
+
+
+for ( int i=0; i<3;(i++) ){
+Println("i="+i);
+//más sentencias
+}
+
+for ( i=5; i>2;i=(i)-1; ){
+Print("i="+(i)+"\n");
+//más sentencias
+}
+boolean papa = false;

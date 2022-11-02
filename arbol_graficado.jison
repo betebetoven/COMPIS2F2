@@ -27,7 +27,7 @@ nunumber [0-9]+
 number [0-9]+"."? [0-9]*
 cadena "\"" [^\"]* "\""
 cadenita "'" [^']* "'"
-bool    "true"|"false"   
+//bool    "true"|"false"   
 
 %%
 
@@ -51,7 +51,7 @@ bool    "true"|"false"
 
 {number}    return 'expreR_numero'
 {cadena}    return 'expreR_cadena'
-{bool}      return 'expreR_bool'
+//{bool}      return 'expreR_bool'
 {cadenita}  return 'expreR_cadenita'
 
 
@@ -374,12 +374,11 @@ Factor: '(' E ')'
     | F
     
 ;
-F: expreR_numero {}
-    |expreR_bool {}
-    | 'true' {$$= new nodo("TRUE);}
+F: expreR_numero {$$= new nodo("INT");}
+    | 'true' {$$= new nodo("TRUE");}
     | 'false' {$$= new nodo("FALSE");}
-    |expreR_cadena {}
-    |expreR_cadenita() {$$ = new nodo("FRASE");}
+    |expreR_cadena {$$= new nodo("FRASE");}
+    |expreR_cadenita() {$$ = new nodo("FRASECITA");}
     |TIPODATO_DECLARACION {}
     |CALL {}
     |'id' '[' E ']'
