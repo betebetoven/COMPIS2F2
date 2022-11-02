@@ -71,7 +71,7 @@
     recoverable: (boolean: TRUE when the parser has a error recovery rule available for this particular error)
   }
 */
-var prueba = (function(){
+var arbol_graficado = (function(){
 var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,22],$V1=[2,78],$V2=[1,28],$V3=[1,29],$V4=[1,30],$V5=[1,32],$V6=[1,26],$V7=[1,33],$V8=[1,34],$V9=[1,27],$Va=[1,31],$Vb=[1,23],$Vc=[1,24],$Vd=[1,36],$Ve=[1,37],$Vf=[1,38],$Vg=[1,39],$Vh=[1,40],$Vi=[2,5,26,31,32,33,35,36,42,43,44,57,61,62,69,70,71,72,73],$Vj=[1,46],$Vk=[2,84],$Vl=[1,55],$Vm=[1,53],$Vn=[1,50],$Vo=[1,73],$Vp=[1,57],$Vq=[1,58],$Vr=[1,59],$Vs=[1,60],$Vt=[1,61],$Vu=[1,62],$Vv=[1,65],$Vw=[1,66],$Vx=[1,67],$Vy=[1,68],$Vz=[1,69],$VA=[1,70],$VB=[1,71],$VC=[1,77],$VD=[52,64],$VE=[2,87],$VF=[1,78],$VG=[1,82],$VH=[1,83],$VI=[1,94],$VJ=[19,27,29,30,31,36,39,52,64,65,66,69,70,71,72,73,76,77,79,80,82,83,84,86,88,89,90,92,93,94,95,96,97,98,99,100,101,102,103,104],$VK=[1,103],$VL=[1,97],$VM=[1,98],$VN=[1,102],$VO=[1,100],$VP=[1,101],$VQ=[19,27,29,31,36,39,52,64,66,69,70,71,72,73,76,77,79,80,82,83,84,86,88,89,90,92,93,94,95,96,97,98,99,100,101,102,103,104],$VR=[19,27,29,31,36,39,52,64,66,69,70,71,72,73,76,77,79,80,82,83,84,92,93,94,95,96,97,98,99,100,101,102,103,104],$VS=[1,106],$VT=[1,107],$VU=[1,108],$VV=[1,109],$VW=[1,111],$VX=[2,116],$VY=[2,128],$VZ=[1,120],$V_=[1,121],$V$=[1,122],$V01=[19,52,64],$V11=[19,29,31,39,52,66,80,82,86,88,89,90],$V21=[2,58],$V31=[1,178],$V41=[29,52],$V51=[29,31,52],$V61=[1,179],$V71=[2,5,19,26,27,29,31,32,33,35,36,42,43,44,57,61,62,69,70,71,72,73,77,79,92,93,94,95,96,97,98,99,100,101,102,103,104],$V81=[1,197],$V91=[2,118],$Va1=[1,230],$Vb1=[1,238],$Vc1=[1,241],$Vd1=[38,41],$Ve1=[1,267],$Vf1=[2,119],$Vg1=[27,29,36,69,70,71,72,73,76,77,79,83,84,86,88,89,90,92,93,94,95,96,97,98,99,100,101,102,103,104],$Vh1=[31,52],$Vi1=[2,5,26,31,32,33,35,36,42,43,44,46,47,57,61,62,69,70,71,72,73];
 var parser = {trace: function trace () { },
 yy: {},
@@ -145,6 +145,12 @@ console.log("reconocio sentencia DECLARACION VECTOR")
 break;
 case 22:
  console.log("Error sintactico en la linea"+(yylineno+1)); 
+break;
+case 115:
+this.$ = new nodo("FRASE");
+break;
+case 129:
+this.$= new nodo("VARIABLE");
 break;
 }
 },
@@ -400,8 +406,8 @@ _handle_error:
 
     //codigo en JS
     //importaciones y declaraciones
-    //const {Declaracion} = require('./instrucciones/declaracion.js');
-    //const {Asignacion} = require('./instrucciones/asignar.js');
+    const {listaenlazada} = require('./listaenlazada.js');
+    const {nodo} = require('./nodo.js');
     //const {Literal} = require('./expresiones/literal.js')
     //const {Type} = require('./symbols/type.js');
     //const {Arithmetic} = require('./expresiones/aritmeticas.js');
@@ -824,65 +830,61 @@ case 38:return 104
 break;
 case 39:return 74
 break;
-case 40:return 94
+case 40:return 19 
 break;
-case 41:return 95
+case 41:return 64
 break;
-case 42:return 19 
+case 42:return 39 
 break;
-case 43:return 64
+case 43:return 76 
 break;
-case 44:return 39 
+case 44:return 77 
 break;
-case 45:return 76 
+case 45:return 86 
 break;
-case 46:return 77 
+case 46:return 88 
 break;
-case 47:return 86 
+case 47:return 52
 break;
-case 48:return 88 
+case 48:return 30 
 break;
-case 49:return 52
+case 49:return 31 
 break;
-case 50:return 30 
+case 50:return 29 
 break;
-case 51:return 31 
+case 51:return 27 
 break;
-case 52:return 29 
+case 52:return 83
 break;
-case 53:return 27 
+case 53:return 84
 break;
-case 54:return 83
+case 54:return 82
 break;
-case 55:return 84
+case 55:return 80
 break;
-case 56:return 82
+case 56:return 90
 break;
-case 57:return 80
+case 57:return 79
 break;
-case 58:return 90
+case 58:return 89
 break;
-case 59:return 79
+case 59:return 65
 break;
-case 60:return 89
+case 60:return 66
 break;
-case 61:return 65
+case 61:return 36;
 break;
-case 62:return 66
+case 62:return 5
 break;
-case 63:return 36;
-break;
-case 64:return 5
-break;
-case 65: 
+case 63: 
         console.log("error lexico :"+yy_.yytext)
         //push para array errores
     
 break;
 }
 },
-rules: [/^(?:\s+)/i,/^(?:\/\/.*)/i,/^(?:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/])/i,/^(?:([0-9]+\.?[0-9]*))/i,/^(?:("[^\"]*"))/i,/^(?:{bool})/i,/^(?:('[^']*'))/i,/^(?:var\b)/i,/^(?:let\b)/i,/^(?:const\b)/i,/^(?:int\b)/i,/^(?:double\b)/i,/^(?:char\b)/i,/^(?:string\b)/i,/^(?:boolean\b)/i,/^(?:print\b)/i,/^(?:println\b)/i,/^(?:return\b)/i,/^(?:while\b)/i,/^(?:switch\b)/i,/^(?:for\b)/i,/^(?:do\b)/i,/^(?:if\b)/i,/^(?:else\b)/i,/^(?:elif\b)/i,/^(?:break\b)/i,/^(?:void\b)/i,/^(?:call\b)/i,/^(?:typeof\b)/i,/^(?:case\b)/i,/^(?:default\b)/i,/^(?:until\b)/i,/^(?:continue\b)/i,/^(?:tolower\b)/i,/^(?:toupper\b)/i,/^(?:round\b)/i,/^(?:length\b)/i,/^(?:tostring\b)/i,/^(?:tochararray\b)/i,/^(?:new\b)/i,/^(?:true\b)/i,/^(?:false\b)/i,/^(?:;)/i,/^(?:=)/i,/^(?::)/i,/^(?:\+)/i,/^(?:-)/i,/^(?:\*)/i,/^(?:\/)/i,/^(?:,)/i,/^(?:\{)/i,/^(?:\})/i,/^(?:\))/i,/^(?:\()/i,/^(?:<)/i,/^(?:>)/i,/^(?:\|\|)/i,/^(?:&&)/i,/^(?:\^)/i,/^(?:!)/i,/^(?:%)/i,/^(?:\[)/i,/^(?:\])/i,/^(?:[a-zA-ZñÑ][a-zA-Z0-9_ñÑ]*)/i,/^(?:$)/i,/^(?:.)/i],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65],"inclusive":true}}
+rules: [/^(?:\s+)/i,/^(?:\/\/.*)/i,/^(?:[/][*][^*]*[*]+([^/*][^*]*[*]+)*[/])/i,/^(?:([0-9]+\.?[0-9]*))/i,/^(?:("[^\"]*"))/i,/^(?:(true|false\b))/i,/^(?:('[^']*'))/i,/^(?:var\b)/i,/^(?:let\b)/i,/^(?:const\b)/i,/^(?:int\b)/i,/^(?:double\b)/i,/^(?:char\b)/i,/^(?:string\b)/i,/^(?:boolean\b)/i,/^(?:print\b)/i,/^(?:println\b)/i,/^(?:return\b)/i,/^(?:while\b)/i,/^(?:switch\b)/i,/^(?:for\b)/i,/^(?:do\b)/i,/^(?:if\b)/i,/^(?:else\b)/i,/^(?:elif\b)/i,/^(?:break\b)/i,/^(?:void\b)/i,/^(?:call\b)/i,/^(?:typeof\b)/i,/^(?:case\b)/i,/^(?:default\b)/i,/^(?:until\b)/i,/^(?:continue\b)/i,/^(?:tolower\b)/i,/^(?:toupper\b)/i,/^(?:round\b)/i,/^(?:length\b)/i,/^(?:tostring\b)/i,/^(?:tochararray\b)/i,/^(?:new\b)/i,/^(?:;)/i,/^(?:=)/i,/^(?::)/i,/^(?:\+)/i,/^(?:-)/i,/^(?:\*)/i,/^(?:\/)/i,/^(?:,)/i,/^(?:\{)/i,/^(?:\})/i,/^(?:\))/i,/^(?:\()/i,/^(?:<)/i,/^(?:>)/i,/^(?:\|\|)/i,/^(?:&&)/i,/^(?:\^)/i,/^(?:!)/i,/^(?:%)/i,/^(?:\[)/i,/^(?:\])/i,/^(?:[a-zA-ZñÑ][a-zA-Z0-9_ñÑ]*)/i,/^(?:$)/i,/^(?:.)/i],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63],"inclusive":true}}
 });
 return lexer;
 })();
@@ -896,9 +898,9 @@ return new Parser;
 
 
 if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
-exports.parser = prueba;
-exports.Parser = prueba.Parser;
-exports.parse = function () { return prueba.parse.apply(prueba, arguments); };
+exports.parser = arbol_graficado;
+exports.Parser = arbol_graficado.Parser;
+exports.parse = function () { return arbol_graficado.parse.apply(arbol_graficado, arguments); };
 exports.main = function commonjsMain (args) {
     if (!args[1]) {
         console.log('Usage: '+args[0]+' FILE');

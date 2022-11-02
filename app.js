@@ -2,6 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var fs = require('fs'); 
 var parser = require('./prueba');
+var arbol_graf = require('./arbol_graficado.js');
 
 
 
@@ -31,8 +32,12 @@ app.get('/', function (req, res){
     
     res.json({mensaje: "hola patata"});
 })
-app.get('/retornoTexto', function (req, res){
-
+app.get('/r', function (req, res){
+    fs.readFile('./entrada.txt', (err, data) => {
+        console.log(data.toString());
+        if (err) throw err;
+        arbol_graf.parse(data.toString());
+    });
     res.send( "Este mensaje esta en texto");
 })
 app.get('/getincremental', function (req, res){

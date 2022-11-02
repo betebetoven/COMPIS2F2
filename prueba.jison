@@ -27,7 +27,7 @@ nunumber [0-9]+
 number [0-9]+"."? [0-9]*
 cadena "\"" [^\"]* "\""
 cadenita "'" [^']* "'"
-bool    "true"|"false"   
+//bool    "true"|"false"   
 
 %%
 
@@ -94,6 +94,8 @@ bool    "true"|"false"
 "tostring" return 'pr_TS'
 "tochararray" return 'pr_TCA'
 "new" return 'pr_new'
+"true" return 'true'
+"false" return 'false'
 
 
 
@@ -288,7 +290,8 @@ IMPRIMIRLN : 'pr_println'  ETS  ';'
 //;
 //ASIGNACION DE VARIABLES YA DECLARADAS (CAMBIO DE VALOR)
 ASIGNACION : IDS '=' ETS ';' {} 
-            
+            |'id' '[' E ']' '=' ETS ';' {} 
+            |'id' '[' E ']''[' E ']' '=' ETS ';' {} 
 ;
 
 
@@ -375,10 +378,14 @@ Factor: '(' E ')'
 ;
 F: expreR_numero {}
     |expreR_bool {}
+    | 'true' {}
+    | 'false' {}
     |expreR_cadena {}
     |expreR_cadenita() {}
     |TIPODATO_DECLARACION {}
     |CALL {}
+    |'id' '[' E ']'
+    |'id' '[' E ']''[' E ']'
     | E  E {}
     | 'pr_TL'  E {}
     | 'pr_TU'  E {}

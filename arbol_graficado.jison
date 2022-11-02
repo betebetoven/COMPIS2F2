@@ -1,8 +1,8 @@
 %{
     //codigo en JS
     //importaciones y declaraciones
-    //const {Declaracion} = require('./instrucciones/declaracion.js');
-    //const {Asignacion} = require('./instrucciones/asignar.js');
+    const {listaenlazada} = require('./listaenlazada.js');
+    const {nodo} = require('./nodo.js');
     //const {Literal} = require('./expresiones/literal.js')
     //const {Type} = require('./symbols/type.js');
     //const {Arithmetic} = require('./expresiones/aritmeticas.js');
@@ -22,11 +22,11 @@
 %lex
 %options case-insensitive
 
-number [0-9]+
-//DecIntegerLiteral  
-//number (0 | [1-9][0-9]*)+"."? (0 | [1-9][0-9]*)?
+nunumber [0-9]+
+//DecIntegerLiteral  0 | [1-9][0-9]*
+number [0-9]+"."? [0-9]*
 cadena "\"" [^\"]* "\""
-//cadenita "\'" [^\"]* "\'"
+cadenita "'" [^']* "'"
 bool    "true"|"false"   
 
 %%
@@ -52,7 +52,7 @@ bool    "true"|"false"
 {number}    return 'expreR_numero'
 {cadena}    return 'expreR_cadena'
 {bool}      return 'expreR_bool'
-//{cadenita}  return 'expreR_cadenita'
+{cadenita}  return 'expreR_cadenita'
 
 
 
@@ -93,6 +93,7 @@ bool    "true"|"false"
 "length" return 'pr_len'
 "tostring" return 'pr_TS'
 "tochararray" return 'pr_TCA'
+"new" return 'pr_new'
 
 
 
@@ -118,10 +119,10 @@ bool    "true"|"false"
 "^" return '^'
 "!" return '!'
 "%" return '%'
-"<=" return '<='
-">=" return '>='
-"==" return '=='
-"!=" return '!='
+//"<=" return '<='
+//">=" return '>='
+//"==" return '=='
+//"!=" return '!='
 "[" return '['
 "]" return ']'
 
@@ -175,20 +176,26 @@ INSTRUCCION : DECLARACION   { console.log("reconocio declaracion ") }
             | CONDICIONIF   { console.log("reconocio condicion if") } 
             | CICLO         {console.log("reconocio  ciclo")}
             | RETURN   {console.log("reconocio  RETURN")}
-            | CALL      {console.log("reconocio  LLAMADA")}
+            | CALL ';'     {console.log("reconocio  LLAMADA")}
             | SWITCH    {console.log("reconocio sentencia SWITCH")}
-            | BREAK
+            | BREAK     {console.log("reconocio sentencia BREAK")}
+            | CONTINUE     {console.log("reconocio sentencia CONTINUE")}
+            | AUMENTO ';'   {console.log("reconocio sentencia AUMENTO")}
+            | INSTANCIA ';'   {console.log("reconocio sentencia INSTANCIA")}
+            |DECLARACION_VECTORES {console.log("reconocio sentencia DECLARACION VECTOR")}
             | error    ';'  { console.log("Error sintactico en la linea"+(yylineno+1)); }
 ;
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
-CICLO: 'pr_for'  '(' DECLARACION ETS ';'  ASIGNACION ')' '{' INSTRUCCIONES '}'  {}
+CICLO: 'pr_for'  '(' DECLARACION ETS ';'  ETS ')' '{' INSTRUCCIONES '}'  {}
+    | 'pr_for' '('  ASIGNACION ETS ';'  ETS   ')'  '{' INSTRUCCIONES '}'  {}
+    |'pr_for'  '(' DECLARACION ETS ';'  ASIGNACION ')' '{' INSTRUCCIONES '}'  {}
     | 'pr_for' '('  ASIGNACION ETS ';'  ASIGNACION   ')'  '{' INSTRUCCIONES '}'  {}
     | 'pr_while' '(' ETS ')' '{' INSTRUCCIONES '}'  {}
     | 'pr_do' '{' INSTRUCCIONES '}' 'pr_while' '(' ETS ')' ';' {}
     | 'pr_do' '{' INSTRUCCIONES '}' 'pr_until' '(' ETS ')' ';' {}
     ;
 
-SWITCH : 'pr_switch' '(' ETS ')' '{' OPCIONES 'pr_default' ':' '{' INSTRUCCIONES '}' '}' {}
+SWITCH : 'pr_switch' '(' 'id' ')' '{' OPCIONES 'pr_default' ':' '{' INSTRUCCIONES '}' '}' {}
 ;
 OPCIONES: OPCIONES OPCION  {}
             | OPCION  {}
@@ -196,9 +203,9 @@ OPCIONES: OPCIONES OPCION  {}
 OPCION : 'pr_case'  ETS  ':' '{' INSTRUCCIONES '}' {}
 ;
 
-BREAK: 'pr_break'
+BREAK: 'pr_break' ';' {}
 ;
-CONTINUE: 'pr_continue'
+CONTINUE: 'pr_continue' ';' {}
 ;
 
 
@@ -223,17 +230,17 @@ IFANIDADOS : IFANIDADOS  'pr_elif' '(' ETS ')'  '{' INSTRUCCIONES '}' {}
 
 
 //FUNCIONES Y METODOS CON PARAMETROS
-FUNCION: E PARAMETROS ':'  TIPODATO_DECLARACION '{' BLOQUE '}'
+FUNCION: 'id' PARAMETROS ':'  TIPODATO_DECLARACION '{' INSTRUCCIONES '}'
 ;
-METODO : E PARAMETROS ':' 'pr_void'  '{' INSTRUCCIONES '}'
-        | E PARAMETROS   '{' INSTRUCCIONES '}'
+METODO : 'id' PARAMETROS ':' 'pr_void'  '{' INSTRUCCIONES '}'
+        | 'id' PARAMETROS   '{' INSTRUCCIONES '}'
 ;
 PARAMETROS : '(' PARS ')' 
 ;
-PARS : PARS ',' PAR 
+PARS : PARS ',' PAR
      | PAR          
 ;
-PAR : TIPODATO_DECLARACION E
+PAR : TIPODATO_DECLARACION  'id'
 ;
 PARAMETROSLL : '(' PARSLL ')' 
 ;
@@ -243,10 +250,10 @@ PARSLL : PARSLL ',' E
 
 //sin parametros
 
-FUNCIONsp: E  '(' ')' ':' TIPODATO_DECLARACION  '{' INSTRUCCIONES '}'
+FUNCIONsp: 'id'  '(' ')' ':' TIPODATO_DECLARACION  '{' INSTRUCCIONES '}'
 ;
-METODOsp : E '(' ')' ':' 'pr_void'  '{' INSTRUCCIONES '}' 
-        | E '(' ')'   '{' INSTRUCCIONES '}' 
+METODOsp : 'id' '(' ')' ':' 'pr_void'  '{' INSTRUCCIONES '}' 
+        | 'id' '(' ')'   '{' INSTRUCCIONES '}' 
 ;
 //EL RETURN
 
@@ -255,19 +262,25 @@ RETURN : 'pr_return' '(' ETS ')' ';'
 ;
 
 //LLAMADA DE FUNCION O METODOS
-CALL:  E PARAMETROSLL ';'
-    |  E '('')'';'
+CALL:  'id' PARAMETROSLL 
+    |  'id' '('')'
 
 ;
 
 
+LISTADEPARSLL: LISTADEPARSLL ',' PARALISTA {}
+            | PARALISTA {}
+;
+PARALISTA : '{' PARSLL '}' {}
 
-
+;
+LISTADELISTAS : '{' LISTADEPARSLL '}' {}
+;
 //INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
 
-IMPRIMIR : 'pr_print' '(' ETS ')' ';'
+IMPRIMIR : 'pr_print'  ETS  ';'
 ;
-IMPRIMIRLN : 'pr_println' '(' ETS ')' ';'
+IMPRIMIRLN : 'pr_println'  ETS  ';'
 ;
 
 //BLOQUE DE INSTRUCCIONES
@@ -275,7 +288,8 @@ IMPRIMIRLN : 'pr_println' '(' ETS ')' ';'
 //;
 //ASIGNACION DE VARIABLES YA DECLARADAS (CAMBIO DE VALOR)
 ASIGNACION : IDS '=' ETS ';' {} 
-            
+            |'id' '[' E ']' '=' ETS ';' {} 
+            |'id' '[' E ']''[' E ']' '=' ETS ';' {} 
 ;
 
 
@@ -290,16 +304,22 @@ TIPODATO_DECLARACION  :  'pr_numero' {}
                        | 'pr_char' {}
                        ; 
 
-DECLARACION : TIPO_DECLARACION_CONST  TIPODATO_DECLARACION IDS '=' ETS ';' {}
-            |
-            TIPODATO_DECLARACION IDS '=' ETS ';'  {}
+DECLARACION : INSTANCIA  '=' ETS ';'  {}
             ;
-DECLARACION_INTERNA : TIPODATO_DECLARACION IDS '=' ETS {}
+DECLARACION_VECTORES:TIPODATO_DECLARACION '[' ']' 'id' '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']'';'
+                    |TIPODATO_DECLARACION '[' ']' '[' ']' 'id' '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']' '[' ETS ']' ';'
+                    |TIPODATO_DECLARACION '[' ']' 'id' '=' PARALISTA ';'
+                    ||TIPODATO_DECLARACION '[' ']' '[' ']' 'id' '=' LISTADELISTAS ';'
+;
+INSTANCIA: TIPODATO_DECLARACION  IDS {}
+;
+DECLARACION_INTERNA : E IDS '=' ETS {}
             ;
+AUMENTO : 'id' '+' '+'  {}
+        | 'id' '-' '-'  {}
+;
 
-
-
-ETS :   '(' TIPODATO_DECLARACION ')'  ETS {}
+ETS :   /*'(' TIPODATO_DECLARACION ')'  ETS {}
         | 'pr_TL' '(' ETS ')'{}
         | 'pr_TU' '(' ETS ')'{}
         | 'pr_round' '(' ETS ')'{}
@@ -307,14 +327,14 @@ ETS :   '(' TIPODATO_DECLARACION ')'  ETS {}
         | 'pr_typeof' '(' ETS ')'{}
         | 'pr_TS' '(' ETS ')'{}
         | 'pr_TCA' '(' ETS ')'{}
-        | COMPARACIONES {}
+        | COMPARACIONES {}*/
         | E {}
-        | INSTRUCCION {}
+        //| INSTRUCCION {}
 ; 
 
 
-IDS : IDS ',' E{}
-    | E {}
+IDS : IDS ',' 'id' {}
+    | 'id' {}
     ;
 COMPARACIONES: '!' '(' COMPARACIONES ')' {}
             |  COMPARACIONES '&&' COMP {}
@@ -328,16 +348,22 @@ COMP:  E '<' E {}
     |  E '!''=' E   {}
     |  E '=''=' E   {}
 ;
+
+
+
 E: E '+' Term {}
 |E '-' Term {}
 |'-' Term {}
+| AUMENTO {}
+//| E '-' '-' {}
+//|CALL {}
 |Term  {}
 ;
 
 Term: Term '*' Factor {}
 |Term '/' Factor {}
 | Term '%' Factor  {}
-//|  Term '^' '[' E ']' {}
+|  Term '^' '[' E ']' {}
 |Factor {}
 ;
 
@@ -346,11 +372,27 @@ Term: Term '*' Factor {}
 
 Factor: '(' E ')' 
     | F
+    
 ;
 F: expreR_numero {}
     |expreR_bool {}
+    | 'true' {$$= new nodo("TRUE);}
+    | 'false' {$$= new nodo("FALSE");}
     |expreR_cadena {}
-    //|expreR_cadenita()
-    | 'id' {}
+    |expreR_cadenita() {$$ = new nodo("FRASE");}
+    |TIPODATO_DECLARACION {}
+    |CALL {}
+    |'id' '[' E ']'
+    |'id' '[' E ']''[' E ']'
+    | E  E {}
+    | 'pr_TL'  E {}
+    | 'pr_TU'  E {}
+    | 'pr_round'  E {}
+    | 'pr_len'  E {}
+    | 'pr_typeof'  E {}
+    | 'pr_TS'  E {}
+    | 'pr_TCA'  E {}
+    | COMPARACIONES {}
+    | 'id' {$$= new nodo("VARIABLE");}
 ;
 // INSSTRUCCION FOR
