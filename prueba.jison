@@ -1,20 +1,20 @@
 %{
     //codigo en JS
     //importaciones y declaraciones
-    //const {Declaracion} = require('./instrucciones/declaracion.js');
-    //const {Asignacion} = require('./instrucciones/asignar.js');
-    //const {Literal} = require('./expresiones/literal.js')
-    //const {Type} = require('./symbols/type.js');
-    //const {Arithmetic} = require('./expresiones/aritmeticas.js');
-    //const {Acceso} = require('./expresiones/Acceso.js');
-    //const {AritmeticOption} = require('./expresiones/aritmeticOption.js');
+    const {Declaracion} = require('./instrucciones/declaracion.js');
+    const {Asignacion} = require('./instrucciones/asignar.js');
+    const {Literal} = require('./expresiones/literal.js')
+    const {Type} = require('./symbols/type.js');
+    const {Arithmetic} = require('./expresiones/aritmeticas.js');
+    const {Acceso} = require('./expresiones/Acceso.js');
+    const {AritmeticOption} = require('./expresiones/aritmeticOption.js');
     //const {Bloque} = require('./instrucciones/Env')
     //const {Imprimir} = require('./instrucciones/imprimir')
    //const {Sentencia_if} = require('./instrucciones/condicionIf')
     //const {metodo} = require('./instrucciones/metodo')
     //const {llamada} = require('./instrucciones/llamada')
-    //const { RelacionalOption } = require("./expresiones/relacionalOptions.js");
-    //const { Relacional } = require("./expresiones/relacional.js");
+    const { RelacionalOption } = require("./expresiones/relacionalOptions.js");
+    const { Relacional } = require("./expresiones/relacional.js");
     var array_erroresLexicos;
    
 %}
