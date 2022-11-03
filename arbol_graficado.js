@@ -690,10 +690,10 @@ case 79:
                                      this.$ = p;
 break;
 case 81:
- p = $$[$0-2]; p.agrega(new nodo("MAS")); p.agrega(new nodo("MAS"));  this.$ = p;
+ p = new listaenlazada(); p.agrega(new nodo("VARIABLE")); p.agrega(new nodo("MAS_aumento")); p.agrega(new nodo("MAS_aumento"));  this.$ = p;
 break;
 case 82:
- p = $$[$0-2]; p.agrega(new nodo("MAENOS")); p.agrega(new nodo("MENOS"));  this.$ = p;
+ p = new listaenlazada(); p.agrega(new nodo("VARIABLE")); p.agrega(new nodo("MENOS_aumento")); p.agrega(new nodo("MENOS_aumento"));  this.$ = p;
 break;
 case 84:
  p = new listaenlazada(); p.agrega(new nodo("E")); p.agrega(new nodo($$[$0])); this.$ = p;

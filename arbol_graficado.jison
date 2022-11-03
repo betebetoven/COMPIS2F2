@@ -903,8 +903,8 @@ DECLARACION_INTERNA : E IDS '=' ETS {}
 
 
 
-AUMENTO : 'id' '+' '+'  { p = $1; p.agrega(new nodo("MAS")); p.agrega(new nodo("MAS"));  $$ = p;}
-        | 'id' '-' '-'  { p = $1; p.agrega(new nodo("MAENOS")); p.agrega(new nodo("MENOS"));  $$ = p;}
+AUMENTO : 'id' '+' '+'  { p = new listaenlazada(); p.agrega(new nodo("VARIABLE")); p.agrega(new nodo("MAS_aumento")); p.agrega(new nodo("MAS_aumento"));  $$ = p;}
+        | 'id' '-' '-'  { p = new listaenlazada(); p.agrega(new nodo("VARIABLE")); p.agrega(new nodo("MENOS_aumento")); p.agrega(new nodo("MENOS_aumento"));  $$ = p;}
 ;
 
 
