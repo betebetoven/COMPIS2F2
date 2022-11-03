@@ -18,7 +18,9 @@ class Asignacion extends Instruccion {
             
             const expresion= this.valor.executar(env);
             const tmp = env.getTipo_variable(this.nombre);
-            const tmp4 = env.get_variable(this.nombre)
+            const tmp4 = env.get_variable(this.nombre);
+            console.log("buscando"+this.nombre);
+            console.log("si llego a encontrar la variable"+tmp4);
             env.actualizar_variable(this.nombre,new Symbol(expresion.value, this.nombre, tmp,tmp4.editable));
            // env.actualizar_variable(this.nombre,expresion.value);
 

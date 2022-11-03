@@ -28,6 +28,12 @@ class Literal extends Expression {
             rtn.value = this.value;
             rtn.type = Type.STRING;
         }
+        else if (this.type == Type.CHAR){
+            this.value = (this.value).replaceAll("\'","")
+            //return { value: this.value, type: Type.STRING }
+            rtn.value = this.value;
+            rtn.type = Type.CHAR;
+        }
         else if (this.type == Type.BOOLEAN) {
             if (this.value == "true") 
             {

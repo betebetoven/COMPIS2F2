@@ -1,3 +1,5 @@
+const { Environment } = require("./symbols/enviroment.js");
+const {consola} = require("./patron_singleton/singleton.js");
 var express = require('express');
 var morgan = require('morgan');
 var fs = require('fs'); 
@@ -24,10 +26,24 @@ console.log('escuchando en el puerto 8080 jaja');
 })
 app.get('/', function (req, res){
     incremental++;
+    var env_padre = new Environment(null);
     fs.readFile('./entrada.txt', (err, data) => {
         console.log(data.toString());
         if (err) throw err;
-        parser.parse(data.toString());
+        const ast = parser.parse(data.toString());
+        for (const elemento  of ast) {
+            try {
+                
+                //preguntar si ese elemtno es de clase metodo o funciones
+                
+                    elemento.executar(env_padre)
+                
+            } catch (error) {
+                //console.log(error);
+                
+                
+            }
+        }
     });
     
     res.json({mensaje: "hola patata"});

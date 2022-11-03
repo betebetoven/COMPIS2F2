@@ -9,62 +9,10 @@
 //Seccion de declaraciones
 
 
-Multiplicacion(int numero1, int numero2):int{
-	 //otra condicion booleanda
-    if( suma(1,2)==3 && 45+56==12){
-        println("Esta bien");
-        var1--;
-    }elif(suma(1,3)==4|| "Universidad"=="usac"){
-        println("Esta es otra suma");
-        boolean v4= (boolean)'A';
-        //vector1.pop(); AGREEEEEEEEEEEEGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAR POOOOOOOOOOOOOOOOP
-    }elif(suma(1,4)==4+1){
-        //edades.push(50-89*4);AGREGAR PUSHHHHH AAAAAAAAAAAAAAAAAAAAAAAA
-        println("Esta es otra suma");
-        //lista.pop();AGREGAR POOOOOOP AAAAAAAAAAAAAAAAAAA
-        switch(edad){
-            case 18: 
-			{
-                println("mayoria de eddad en guatemala");
-                string v5= (string)"hola"+" usac";
-                break;
-				}
-            case /*Este mensaje no tendria que dar error porque se omite desde el anlaisis lexico*/ 21:
-                // Este es la mayoria de edad en otro pais
-				{
-                println("mayoria de edad en us");
-                int v1= (int)12+1;
-                break;
-				}
-            default:
-			{
-                //instrucciones si no se da a complir la conidcion
-                //var3 = ("usac"=="usac")? 1:4+5;
-				int var3 ;
-				if ("usac"=="usac")
-				{
-					var3 = 1;
-				}
-				else
-				{
-					var3 = 4+5;
-				}
-				int var23 ;
-				if ("usac"=="usac")
-				{
-					var23 = 1;
-				}
-				else
-				{
-					var23	= 4+5;
-				}
-                //int var23 = ("usac"=="usac")? 1:4+5;
-                break;
-				}
-        }
-    }
-    
-}
+int a,b,c;
+int la,le,li =2+10;
+la = (la)+20*5+(la++)-1;
+la++;
 
 
 

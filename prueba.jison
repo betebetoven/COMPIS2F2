@@ -15,6 +15,8 @@
     //const {llamada} = require('./instrucciones/llamada')
     const { RelacionalOption } = require("./expresiones/relacionalOptions.js");
     const { Relacional } = require("./expresiones/relacional.js");
+    const {DeclaracionARRAY} = require('./instrucciones/declaracionarray.js');
+    const {imprimir} = require('./instrucciones/imprimir.js');
     var array_erroresLexicos;
    
 %}
@@ -159,18 +161,18 @@ cadenita "'" [^']* "'"
  
  
 //GENERAL INSTRUCCIONES 
-INIT: INSTRUCCIONES    EOF {} ;
+INIT: INSTRUCCIONES    EOF {return $1} ;
 
 
-INSTRUCCIONES :   INSTRUCCIONES INSTRUCCION {  console.log("s ")}
-              |   INSTRUCCION               { console.log("s ") }
+INSTRUCCIONES :   INSTRUCCIONES INSTRUCCION {$1.push($2); $$=$1;   console.log("s ")}
+              |   INSTRUCCION               {$$ = [$1]; console.log("s ") }
               ;
 
 
-INSTRUCCION : DECLARACION   { console.log("reconocio declaracion ") } 
-            | IMPRIMIR      { console.log("reconocio PRINT ") } 
-            | IMPRIMIRLN    { console.log("reconocio PRINTLN ") } 
-            | ASIGNACION    { console.log("reconocio asignacion ") }
+INSTRUCCION : DECLARACION   {$$=$1; console.log("reconocio declaracion ") } 
+            | IMPRIMIR      {$$=$1; console.log("reconocio PRINT ") } 
+            | IMPRIMIRLN    {$$=$1; console.log("reconocio PRINTLN ") } 
+            | ASIGNACION    {$$=$1; console.log("reconocio asignacion ") }
             | METODO        {  console.log("reconocio metodo")}
             | FUNCION       { console.log("reconocio funcion") }
             | METODOsp        {  console.log("reconocio metodo sin parametros")}
@@ -182,9 +184,9 @@ INSTRUCCION : DECLARACION   { console.log("reconocio declaracion ") }
             | SWITCH    {console.log("reconocio sentencia SWITCH")}
             | BREAK     {console.log("reconocio sentencia BREAK")}
             | CONTINUE     {console.log("reconocio sentencia CONTINUE")}
-            | AUMENTO ';'   {console.log("reconocio sentencia AUMENTO")}
-            | INSTANCIA ';'   {console.log("reconocio sentencia INSTANCIA")}
-            |DECLARACION_VECTORES {console.log("reconocio sentencia DECLARACION VECTOR")}
+            | AUMENTO ';'   {$$=$1;console.log("reconocio sentencia AUMENTO")}
+            | INSTANCIA ';'   {$$=$1;console.log("reconocio sentencia INSTANCIA")}
+            |DECLARACION_VECTORES {$$=$1;console.log("reconocio sentencia DECLARACION VECTOR")}
             | error    ';'  { console.log("Error sintactico en la linea"+(yylineno+1)); }
 ;
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
@@ -244,10 +246,10 @@ PARS : PARS ',' PAR
 ;
 PAR : TIPODATO_DECLARACION  'id'
 ;
-PARAMETROSLL : '(' PARSLL ')' 
+PARAMETROSLL : '(' PARSLL ')' {$$ = $2}
 ;
-PARSLL : PARSLL ',' E
-     | E 
+PARSLL : PARSLL ',' E {$1.push($3); $$=$1;}
+     | E {$$ = [$1]}
 ;
 
 //sin parametros
@@ -270,26 +272,26 @@ CALL:  'id' PARAMETROSLL
 ;
 
 
-LISTADEPARSLL: LISTADEPARSLL ',' PARALISTA {}
-            | PARALISTA {}
+LISTADEPARSLL: LISTADEPARSLL ',' PARALISTA {$1.push($3); $$=$1;}
+            | PARALISTA {$$ = [$1]}
 ;
-PARALISTA : '{' PARSLL '}' {}
+PARALISTA : '{' PARSLL '}' {$$ = $2}
 
 ;
-LISTADELISTAS : '{' LISTADEPARSLL '}' {}
+LISTADELISTAS : '{' LISTADEPARSLL '}' {$$ = $2}
 ;
 //INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
 
-IMPRIMIR : 'pr_print'  ETS  ';'
+IMPRIMIR : 'pr_print'  ETS  ';' {$$ = new imprimir($2,@1.first_line, @1.first_column );}
 ;
-IMPRIMIRLN : 'pr_println'  ETS  ';'
+IMPRIMIRLN : 'pr_println'  ETS  ';' {$$ = new imprimir($2,@1.first_line, @1.first_column );}
 ;
 
 //BLOQUE DE INSTRUCCIONES
 //BLOQUE: '{' INSTRUCCIONES  '}' {}
 //;
 //ASIGNACION DE VARIABLES YA DECLARADAS (CAMBIO DE VALOR)
-ASIGNACION : IDS '=' ETS ';' {} 
+ASIGNACION : 'id' '=' ETS ';' {$$= new Asignacion($1,$3, @1.first_line, @1.first_column);}  
             |'id' '[' E ']' '=' ETS ';' {} 
             |'id' '[' E ']''[' E ']' '=' ETS ';' {} 
 ;
@@ -299,25 +301,26 @@ ASIGNACION : IDS '=' ETS ';' {}
 
 
 TIPO_DECLARACION_CONST: 'pr_const'; 
-TIPODATO_DECLARACION  :  'pr_numero' {}
-                       | 'pr_bool'    {}
-                       | 'pr_string' {}
-                       | 'pr_double' {}
-                       | 'pr_char' {}
+TIPODATO_DECLARACION  :  'pr_numero' {$$=Type.NUMBER}
+                       | 'pr_bool'    {$$=Type.BOOLEAN}
+                       | 'pr_string' {$$=Type.STRING}
+                       | 'pr_double' {$$=Type.NUMBER}
+                       | 'pr_char' {$$=Type.STRING}
                        ; 
 
-DECLARACION : INSTANCIA  '=' ETS ';'  {}
+DECLARACION : TIPODATO_DECLARACION  IDS   '=' ETS ';'  {$$=new Declaracion(false,$1, $2,$4, @1.first_line, @1.first_column)}
             ;
-DECLARACION_VECTORES:TIPODATO_DECLARACION '[' ']' 'id' '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']'';'
-                    |TIPODATO_DECLARACION '[' ']' '[' ']' 'id' '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']' '[' ETS ']' ';'
-                    |TIPODATO_DECLARACION '[' ']' 'id' '=' PARALISTA ';'
-                    ||TIPODATO_DECLARACION '[' ']' '[' ']' 'id' '=' LISTADELISTAS ';'
+DECLARACION_VECTORES:TIPODATO_DECLARACION '[' ']' IDS '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']'';' {$$= new DeclaracionARRAY(false, $1,$4,null, $9,null,false,@1.first_line, @1.first_column)}
+                    |TIPODATO_DECLARACION '[' ']' '[' ']' IDS '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']' '[' ETS ']' ';' {$$= new DeclaracionARRAY(false, $1,$2,null, $11,$14,true,@1.first_line, @1.first_column)}
+                    |TIPODATO_DECLARACION '[' ']' IDS '=' PARALISTA ';' {$$= new DeclaracionARRAY(false, $1,$4,$6,null,null,false,@1.first_line, @1.first_column)}
+                    ||TIPODATO_DECLARACION '[' ']' '[' ']' IDS '=' LISTADELISTAS ';' {$$= new DeclaracionARRAY(false, $1,$6,$8,null,null,true,@1.first_line, @1.first_column)}
 ;
-INSTANCIA: TIPODATO_DECLARACION  IDS {}
+INSTANCIA: TIPODATO_DECLARACION  IDS {$$=new Declaracion(false,$1, $2,new Literal("0",Type.NUMBER , @1.first_line, @1.first_column), @1.first_line, @1.first_column)}
 ;
-AUMENTO : 'id' '+' '+'  {}
-        | 'id' '-' '-'  {}
+AUMENTO : 'id' '+' '+'  {$$= new Arithmetic(new Literal($1,Type.VARIABLE , @1.first_line, @1.first_column),null,AritmeticOption.SOBRESUMA, @1.first_line, @1.first_column);}
+        | 'id' '-' '-'  {$$= new Arithmetic(new Literal($1,Type.VARIABLE , @1.first_line, @1.first_column),null,AritmeticOption.SOBRERESTA, @1.first_line, @1.first_column);}
 ;
+
 
 ETS :   /*'(' TIPODATO_DECLARACION ')'  ETS {}
         | 'pr_TL' '(' ETS ')'{}
@@ -328,70 +331,70 @@ ETS :   /*'(' TIPODATO_DECLARACION ')'  ETS {}
         | 'pr_TS' '(' ETS ')'{}
         | 'pr_TCA' '(' ETS ')'{}
         | COMPARACIONES {}*/
-        | E {}
+        | E {$$=$1;} 
         //| INSTRUCCION {}
 ; 
 
 
-IDS : IDS ',' 'id' {}
-    | 'id' {}
+IDS : IDS ',' 'id' {$1.push($3); $$=$1;}
+    | 'id'{$$ = [$1]}
     ;
-COMPARACIONES: '!' '(' COMPARACIONES ')' {}
-            |  COMPARACIONES '&&' COMP {}
-            |  COMPARACIONES '||' COMP {}
-            |   COMP  {} 
+COMPARACIONES: '!' '(' COMPARACIONES ')' {$$= new Relacional(null,$2,RelacionalOption.NEGACION, @1.first_line, @1.first_column);}
+            |  COMPARACIONES '&&' COMP {$$= new Relacional($1,$3,RelacionalOption.AND, @1.first_line, @1.first_column);}
+            |  COMPARACIONES '||' COMP {$$= new Relacional($1,$3,RelacionalOption.OR, @1.first_line, @1.first_column);}
+            |   COMP  {$$=$1;}  
 ;
-COMP:  E '<' E {}
-    |  E '>''=' E  {}
-    |  E '<''=' E  {}
-    |  E '>' E     {}
-    |  E '!''=' E   {}
-    |  E '=''=' E   {}
+COMP:  E '<' E {$$= new Relacional($1,$3,RelacionalOption.MENOR, @1.first_line, @1.first_column);}
+    |  E '>''=' E  {$$= new Relacional($1,$3,RelacionalOption.MAYORIGUAL, @1.first_line, @1.first_column);}
+    |  E '<''=' E  {$$= new Relacional($1,$3,RelacionalOption.MENORIGUAL, @1.first_line, @1.first_column);}
+    |  E '>' E     {$$= new Relacional($1,$3,RelacionalOption.MAYOR, @1.first_line, @1.first_column);}
+    |  E '!''=' E   {$$= new Relacional($1,$3,RelacionalOption.NOIGUAL, @1.first_line, @1.first_column);}
+    |  E '=''=' E   {$$= new Relacional($1,$3,RelacionalOption.IGUAL, @1.first_line, @1.first_column);}
 ;
 
 
 
-E: E '+' Term {}
-|E '-' Term {}
-|'-' Term {}
-| AUMENTO {}
+E: E '+' Term {$$= new Arithmetic($1,$3,AritmeticOption.MAS, @1.first_line, @1.first_column);}
+|E '-' Term {$$= new Arithmetic($1,$3,AritmeticOption.MENOS, @1.first_line, @1.first_column);} 
+|'-' Term {{$$= new Arithmetic(new Literal("0",Type.NUMBER , @1.first_line, @1.first_column),$2,AritmeticOption.MENOS, @1.first_line, @1.first_column);} }
+| AUMENTO {$$=$1;} 
 //| E '-' '-' {}
 //|CALL {}
-|Term  {}
+|Term  {$$=$1;} 
 ;
 
-Term: Term '*' Factor {}
-|Term '/' Factor {}
-| Term '%' Factor  {}
-|  Term '^' '[' E ']' {}
-|Factor {}
+Term: Term '*' Factor {$$= new Arithmetic($1,$3,AritmeticOption.MULTIPLICACION, @1.first_line, @1.first_column);}
+|Term '/' Factor {$$= new Arithmetic($1,$3,AritmeticOption.DIVISION, @1.first_line, @1.first_column);}
+| Term '%' Factor  {$$= new Arithmetic($1,$3,AritmeticOption.MODULO, @1.first_line, @1.first_column);}
+|  Term '^' '[' E ']' {$$= new Arithmetic($1,$4,AritmeticOption.POTENCIA, @1.first_line, @1.first_column);}
+|Factor {$$=$1;} 
 ;
 
 
 
 
-Factor: '(' E ')' 
-    | F
+Factor: '(' E ')' {$$=$2;} 
+    | F {$$=$1;} 
     
 ;
-F: expreR_numero {}
-    | 'true' {}
-    | 'false' {}
-    |expreR_cadena {}
-    |expreR_cadenita() {}
+F: expreR_numero {$$=new Literal($1,Type.NUMBER , @1.first_line, @1.first_column)}
+    | 'true' {$$=new Literal($1,Type.BOOLEAN, @1.first_line, @1.first_column)}
+    | 'false' {$$=new Literal($1,Type.BOOLEAN, @1.first_line, @1.first_column)}
+    |expreR_cadena {$$=new Literal($1,Type.STRING , @1.first_line, @1.first_column)}
+    |expreR_cadenita() {$$=new Literal($1,Type.STRING , @1.first_line, @1.first_column)}
     |TIPODATO_DECLARACION {}
-    |CALL {}
+    |CALL {$$=$1;}
     |'id' '[' E ']'
     |'id' '[' E ']''[' E ']'
-    | E  E {}
-    | 'pr_TL'  E {}
-    | 'pr_TU'  E {}
-    | 'pr_round'  E {}
-    | 'pr_len'  E {}
-    | 'pr_typeof'  E {}
-    | 'pr_TS'  E {}
-    | 'pr_TCA'  E {}
-    | COMPARACIONES {}
-    | 'id' {}
+    | E  E {$$=$2;}
+    | 'pr_TL'  E {$$=$1;}
+    | 'pr_TU'  E {$$=$1;}
+    | 'pr_round'  E {$$=$1;}
+    | 'pr_len'  E {$$=$1;}
+    | 'pr_typeof'  E {$$=$1;}
+    | 'pr_TS'  E {$$=$1;}
+    | 'pr_TCA'  E {$$=$1;}
+    | COMPARACIONES {$$=$1;} 
+    | 'id' {$$=new Literal($1,Type.VARIABLE , @1.first_line, @1.first_column)}
 ;
 // INSSTRUCCION FOR

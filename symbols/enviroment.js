@@ -49,7 +49,9 @@ class Environment {
   }
    actualizar_variable(nombre, new_valor) {
     if(this.tablaSimbolos.has(nombre)){
+        console.log("actualizando variable"+nombre)
          this.tablaSimbolos.set(nombre, new_valor);
+         console.log(this.tablaSimbolos);
     }
   }
   
@@ -62,6 +64,7 @@ class Environment {
     while (env != null) {
         if (env.tablaSimbolos.has(nombre)) 
         {
+          console.log("si obtuvo desde environment"+nombre);
         return env.tablaSimbolos.get(nombre);
         }
         env = env.anterior;
