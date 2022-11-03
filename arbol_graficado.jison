@@ -240,84 +240,457 @@ PARAMETROS : '(' PARS ')'
 PARS : PARS ',' PAR
      | PAR          
 ;
-PAR : TIPODATO_DECLARACION  'id'
+PAR : TIPODATO_DECLARACION  'id' { p =new listaenlazada();
+                                    p.agrega(new nodo("TIPO_DATO")); 
+                                    p.agrega(new nodo($1));
+                                    p.agrega(new nodo("VARIABLE")); 
+                                    $$ = p;
+                                    }
 ;
-PARAMETROSLL : '(' PARSLL ')' 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PARAMETROSLL : '(' PARSLL ')' { p = new listaenlazada();
+                            p.agrega(new nodo("ABRE_PARENTESIS"));
+                            p.agrega(new nodo("PARAMETROS")); 
+                            p.agrega(new nodo($2)); 
+                            p.agrega(new nodo("CIERRA_PARENTESIS"));
+                            $$ = p;}
 ;
-PARSLL : PARSLL ',' E
-     | E 
+
+
+
+
+
+
+
+
+
+
+
+
+
+PARSLL : PARSLL ',' E    {                   p = $1; 
+                                            p.agrega(new nodo("COMA"));
+                                            p.agrega(new nodo("E")); 
+                                            p.agrega(new nodo($3));  
+                                            $$ = p;
+                                            }
+     | E {              p =new listaenlazada();
+                        p.agrega(new nodo("E")); 
+                        p.agrega(new nodo($1)); 
+                        $$ = p;}
 ;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //sin parametros
 
-FUNCIONsp: 'id'  '(' ')' ':' TIPODATO_DECLARACION  '{' INSTRUCCIONES '}'
+FUNCIONsp: 'id'  '(' ')' ':' TIPODATO_DECLARACION  '{' INSTRUCCIONES '}'{ p = new listaenlazada(); 
+                                                p.agrega(new nodo("VARIABLE"));
+                                                p.agrega(new nodo("ABRE_PARENTESIS")); 
+                                                p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                p.agrega(new nodo("DOS_PUNTOS"));
+                                                p.agrega(new nodo("TIPO_DATO_DECLARACION"));
+                                                p.agrega(new nodo($5));
+                                                p.agrega(new nodo("ABRE_CORCHETE"));
+                                                p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                p.agrega(new nodo($7));
+                                                p.agrega(new nodo("CIERRA_CORCHETE"));
+                                                $$ = p;}
 ;
-METODOsp : 'id' '(' ')' ':' 'pr_void'  '{' INSTRUCCIONES '}' 
-        | 'id' '(' ')'   '{' INSTRUCCIONES '}' 
+METODOsp : 'id' '(' ')' ':' 'pr_void'  '{' INSTRUCCIONES '}' { p = new listaenlazada(); 
+                                                p.agrega(new nodo("VARIABLE"));
+                                                p.agrega(new nodo("ABRE_PARENTESIS")); 
+                                                p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                p.agrega(new nodo("DOS_PUNTOS"));
+                                                p.agrega(new nodo("VOID"));
+                                                p.agrega(new nodo("ABRE_CORCHETE"));
+                                                p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                p.agrega(new nodo($7));
+                                                p.agrega(new nodo("CIERRA_CORCHETE"));
+                                                $$ = p;}
+
+        | 'id' '(' ')'   '{' INSTRUCCIONES '}' { p = new listaenlazada(); 
+                                                p.agrega(new nodo("VARIABLE"));
+                                                p.agrega(new nodo("ABRE_PARENTESIS")); 
+                                                p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                p.agrega(new nodo("ABRE_CORCHETE"));
+                                                p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                p.agrega(new nodo($5));
+                                                p.agrega(new nodo("CIERRA_CORCHETE"));
+                                                $$ = p;}
 ;
+
+
+
+
+
+
+
+
+
+
+
 //EL RETURN
 
-RETURN : 'pr_return' '(' ETS ')' ';'
-        | 'pr_return' '(' ')' ';'
+RETURN : 'pr_return' '(' ETS ')' ';'{ p = new listaenlazada(); 
+                                p.agrega(new nodo("RETURN"));
+                                p.agrega(new nodo("ETS")); 
+                                p.agrega(new nodo($3)); 
+                                p.agrega(new nodo("PUNTO_Y_COMA"));
+                                $$ = p;}
+        | 'pr_return' '(' ')' ';'{ p = new listaenlazada(); 
+                                p.agrega(new nodo("RETURN"));
+                                p.agrega(new nodo("ABRE PARENTESIS")); 
+                                p.agrega(new nodo("CIERRA PARENTESIS"));
+                                p.agrega(new nodo("PUNTO_Y_COMA"));
+                                $$ = p;}
 ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //LLAMADA DE FUNCION O METODOS
-CALL:  'id' PARAMETROSLL 
-    |  'id' '('')'
+CALL:  'id' PARAMETROSLL { p = new listaenlazada(); 
+                                p.agrega(new nodo("VARIABLE"));
+                                p.agrega(new nodo("PARAMETROSLL")); 
+                                p.agrega(new nodo($2)); 
+                                $$ = p;}
+    |  'id' '('')'{ p = new listaenlazada(); 
+                                p.agrega(new nodo("VARIABLE"));
+                                p.agrega(new nodo("ABRE PARENTESIS")); 
+                                p.agrega(new nodo("CIERRA PARENTESIS"));
+                                $$ = p;}
 
 ;
 
 
-LISTADEPARSLL: LISTADEPARSLL ',' PARALISTA {}
-            | PARALISTA {}
+
+
+
+
+
+
+
+
+
+
+
+LISTADEPARSLL: LISTADEPARSLL ',' PARALISTA { p = $1; 
+                                            p.agrega(new nodo("COMA"));
+                                            p.agrega(new nodo("PARALISTA")); 
+                                            p.agrega(new nodo($3));  
+                                            $$ = p;
+                                            }
+            | PARALISTA { p =new listaenlazada();
+                        p.agrega(new nodo("PARALISTA")); 
+                        p.agrega(new nodo($1)); 
+                        $$ = p;}
 ;
-PARALISTA : '{' PARSLL '}' {}
+PARALISTA : '{' PARSLL '}' { p = new listaenlazada();
+                            p.agrega(new nodo("ABRE_LLAVE"));
+                            p.agrega(new nodo("PARAMETROS")); 
+                            p.agrega(new nodo($2)); 
+                            p.agrega(new nodo("CIERRA_LLAVE"));
+                            $$ = p;}
 
 ;
-LISTADELISTAS : '{' LISTADEPARSLL '}' {}
+LISTADELISTAS : '{' LISTADEPARSLL '}' { p = new listaenlazada();
+                            p.agrega(new nodo("ABRE_LLAVE"));
+                            p.agrega(new nodo("LISTADEPARSLL")); 
+                            p.agrega(new nodo($2)); 
+                            p.agrega(new nodo("CIERRA_LLAVE"));
+                            $$ = p;}
 ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //INSTRUCCION IMPRIMIR UNA Y VARIAS LINEAS
 
-IMPRIMIR : 'pr_print'  ETS  ';'
+IMPRIMIR : 'pr_print'  ETS  ';'{ p = new listaenlazada(); 
+                                p.agrega(new nodo("IMPRIMIR"));
+                                p.agrega(new nodo("ETS")); 
+                                p.agrega(new nodo($2)); 
+                                p.agrega(new nodo("PUNTO_Y_COMA"));
+                                $$ = p;}
 ;
-IMPRIMIRLN : 'pr_println'  ETS  ';'
+IMPRIMIRLN : 'pr_println'  ETS  ';'{ p = new listaenlazada(); 
+                                p.agrega(new nodo("IMPRIMIRLN"));
+                                p.agrega(new nodo("ETS")); 
+                                p.agrega(new nodo($2)); 
+                                p.agrega(new nodo("PUNTO_Y_COMA"));
+                                $$ = p;}
 ;
 
 //BLOQUE DE INSTRUCCIONES
 //BLOQUE: '{' INSTRUCCIONES  '}' {}
 //;
 //ASIGNACION DE VARIABLES YA DECLARADAS (CAMBIO DE VALOR)
-ASIGNACION : IDS '=' ETS ';' {} 
-            |'id' '[' E ']' '=' ETS ';' {} 
-            |'id' '[' E ']''[' E ']' '=' ETS ';' {} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ASIGNACION : IDS '=' ETS ';' { p = new listaenlazada();
+                                        p.agrega(new nodo("IDS"));
+                                        p.agrega($1);
+                                        p.agrega(new nodo("IGUAL"));
+                                        p.agrega(new nodo("ETS"));
+                                        p.agrega(new nodo($3));
+                                        p.agrega(new nodo("PUNTO Y COMA"));
+                                        $$ = p;}
+            
+            |'id' '[' E ']' '=' ETS ';' { p = new listaenlazada();
+                                        p.agrega(new nodo("VARIABLE"));
+                                        p.agrega(new nodo("ABRE CORCHETE"));
+                                        p.agrega(new nodo("E"));
+                                        p.agrega($3);
+                                        p.agrega(new nodo("CIERRA CORCHETE"));
+                                        p.agrega(new nodo("IGUAL"));
+                                        p.agrega(new nodo("ETS"));
+                                        p.agrega(new nodo($6));
+                                        p.agrega(new nodo("PUNTO Y COMA"));
+                                        $$ = p;}
+            |'id' '[' E ']''[' E ']' '=' ETS ';' { p = new listaenlazada();
+                                        p.agrega(new nodo("VARIABLE"));
+                                        p.agrega(new nodo("ABRE CORCHETE"));
+                                        p.agrega(new nodo("E"));
+                                        p.agrega($3);
+                                        p.agrega(new nodo("CIERRA CORCHETE"));
+                                        p.agrega(new nodo("ABRE CORCHETE"));
+                                        p.agrega(new nodo("E"));
+                                        p.agrega($6);
+                                        p.agrega(new nodo("CIERRA CORCHETE"));
+                                        p.agrega(new nodo("IGUAL"));
+                                        p.agrega(new nodo("ETS"));
+                                        p.agrega(new nodo($9));
+                                        p.agrega(new nodo("PUNTO Y COMA"));
+                                        $$ = p;}
 ;
 
 
 //DECLARACION DE VARIABLES NO DECLARADAS SINGULAR O EN CONJUNTO, FINALES O NO FINALES, INCLUYE EXPRESIONES
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 TIPO_DECLARACION_CONST: 'pr_const'; 
-TIPODATO_DECLARACION  :  'pr_numero' {}
-                       | 'pr_bool'    {}
-                       | 'pr_string' {}
-                       | 'pr_double' {}
-                       | 'pr_char' {}
+TIPODATO_DECLARACION  :  'pr_numero' { p = new listaenlazada(); p.agrega( new nodo("TIPO_NUMERO")); $$ = p;}
+                       | 'pr_bool'    { p = new listaenlazada(); p.agrega( new nodo("TIPO_BOOLEAN")); $$ = p;}
+                       | 'pr_string' { p = new listaenlazada(); p.agrega( new nodo("TIPO_STRING")); $$ = p;}
+                       | 'pr_double' { p = new listaenlazada(); p.agrega( new nodo("TIPO_DOUBLE")); $$ = p;}
+                       | 'pr_char' { p = new listaenlazada(); p.agrega( new nodo("TIPO_CHAR")); $$ = p;}
                        ; 
 
-DECLARACION : INSTANCIA  '=' ETS ';'  {}
+
+
+
+
+
+
+
+
+
+DECLARACION : INSTANCIA  '=' ETS ';'  { p = new listaenlazada();
+                                        p.concatena($1);
+                                        p.agrega(new nodo("IGUAL"));
+                                        p.agrega(new nodo("ETS"));
+                                        p.agrega(new nodo($3));
+                                        p.agrega(new nodo("PUNTO Y COMA"));
+                                        $$ = p;}
+            
+            
+            
             ;
-DECLARACION_VECTORES:TIPODATO_DECLARACION '[' ']' 'id' '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']'';'
-                    |TIPODATO_DECLARACION '[' ']' '[' ']' 'id' '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']' '[' ETS ']' ';'
-                    |TIPODATO_DECLARACION '[' ']' 'id' '=' PARALISTA ';'
-                    ||TIPODATO_DECLARACION '[' ']' '[' ']' 'id' '=' LISTADELISTAS ';'
+
+
+
+
+DECLARACION_VECTORES:TIPODATO_DECLARACION '[' ']' 'id' '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']'';'{ p = new listaenlazada();
+                                                                                                        p.agrega(new nodo("TIPO_DATO_DECLARACION"));
+                                                                                                        p.agrega(new nodo($1));
+                                                                                                        p.agrega(new nodo("ABRE_CORCHETE"));
+                                                                                                        p.agrega(new nodo("CIERRACORCHETE"));
+                                                                                                        p.agrega(new nodo("VARIABLE"));
+                                                                                                        p.agrega(new nodo("IGUAL"));
+                                                                                                        p.agrega(new nodo("NEW"));
+                                                                                                        p.agrega(new nodo("TIPO_DATO_DECLARACION"));
+                                                                                                        p.agrega(new nodo($7));
+                                                                                                        p.agrega(new nodo("ABRE_CORCHETE"));
+                                                                                                        p.agrega(new nodo("ETS"));
+                                                                                                        p.agrega(new nodo($9));
+                                                                                                        p.agrega(new nodo("CIERRACORCHETE"));
+                                                                                                        p.agrega(new nodo("PUNTO_Y_COMA"));
+                                                                                                          $$ = p;}
+                    |TIPODATO_DECLARACION '[' ']' '[' ']' 'id' '=' 'pr_new' TIPODATO_DECLARACION '[' ETS ']' '[' ETS ']' ';'{ p = new listaenlazada();
+                                                                                                        p.agrega(new nodo("TIPO_DATO_DECLARACION"));
+                                                                                                        p.agrega(new nodo($1));
+                                                                                                        p.agrega(new nodo("ABRE_CORCHETE"));
+                                                                                                        p.agrega(new nodo("CIERRACORCHETE"));
+                                                                                                        p.agrega(new nodo("ABRE_CORCHETE"));
+                                                                                                        p.agrega(new nodo("CIERRACORCHETE"));
+                                                                                                        p.agrega(new nodo("VARIABLE"));
+                                                                                                        p.agrega(new nodo("IGUAL"));
+                                                                                                        p.agrega(new nodo("NEW"));
+                                                                                                        p.agrega(new nodo("TIPO_DATO_DECLARACION"));
+                                                                                                        p.agrega(new nodo($9));
+                                                                                                        p.agrega(new nodo("ABRE_CORCHETE"));
+                                                                                                        p.agrega(new nodo("ETS"));
+                                                                                                        p.agrega(new nodo($11));
+                                                                                                        p.agrega(new nodo("CIERRACORCHETE"));
+                                                                                                         p.agrega(new nodo("ABRE_CORCHETE"));
+                                                                                                        p.agrega(new nodo("ETS"));
+                                                                                                        p.agrega(new nodo($14));
+                                                                                                        p.agrega(new nodo("CIERRACORCHETE"));
+                                                                                                        p.agrega(new nodo("PUNTO_Y_COMA"));
+                                                                                                          $$ = p;}
+                    |TIPODATO_DECLARACION '[' ']' 'id' '=' PARALISTA ';'{ p = new listaenlazada();
+                                                                                                        p.agrega(new nodo("TIPO_DATO_DECLARACION"));
+                                                                                                        p.agrega(new nodo($1));
+                                                                                                        p.agrega(new nodo("ABRE_CORCHETE"));
+                                                                                                        p.agrega(new nodo("CIERRACORCHETE"));
+                                                                                                        p.agrega(new nodo("VARIABLE"));
+                                                                                                        p.agrega(new nodo("IGUAL"));
+                                                                                                        p.agrega(new nodo("PARALISTA"));
+                                                                                                        p.agrega(new nodo($6));
+                                                                                                        p.agrega(new nodo("PUNTO_Y_COMA"));
+                                                                                                          $$ = p;}
+                    |TIPODATO_DECLARACION '[' ']' '[' ']' 'id' '=' LISTADELISTAS ';'{ p = new listaenlazada();
+                                                                                                        p.agrega(new nodo("TIPO_DATO_DECLARACION"));
+                                                                                                        p.agrega(new nodo($1));
+                                                                                                        p.agrega(new nodo("ABRE_CORCHETE"));
+                                                                                                        p.agrega(new nodo("CIERRACORCHETE"));
+                                                                                                        p.agrega(new nodo("ABRE_CORCHETE"));
+                                                                                                        p.agrega(new nodo("CIERRACORCHETE"));
+                                                                                                        p.agrega(new nodo("VARIABLE"));
+                                                                                                        p.agrega(new nodo("IGUAL"));
+                                                                                                        p.agrega(new nodo("LISTADELISTAS"));
+                                                                                                        p.agrega(new nodo($8));
+                                                                                                        p.agrega(new nodo("PUNTO_Y_COMA"));
+                                                                                                          $$ = p;}
 ;
-INSTANCIA: TIPODATO_DECLARACION  IDS {}
+
+
+
+
+
+
+
+
+
+INSTANCIA: TIPODATO_DECLARACION  IDS { p = new listaenlazada();
+                                    p.agrega(new nodo("TIPO_DATO_DECLARACION"));
+                                    p.agrega(new nodo($1)); 
+                                    p.agrega(new nodo("IDS")); 
+                                    p.agrega(new nodo($2));
+                                     $$ = p;}
 ;
+
+
+
+
+
+
+
+
 DECLARACION_INTERNA : E IDS '=' ETS {}
             ;
-AUMENTO : 'id' '+' '+'  {}
-        | 'id' '-' '-'  {}
+
+
+
+
+
+
+
+
+AUMENTO : 'id' '+' '+'  { p = $1; p.agrega(new nodo("MAS")); p.agrega(new nodo("MAS"));  $$ = p;}
+        | 'id' '-' '-'  { p = $1; p.agrega(new nodo("MAENOS")); p.agrega(new nodo("MENOS"));  $$ = p;}
 ;
+
+
+
+
+
+
+
+
+
+
+
 
 ETS :   /*'(' TIPODATO_DECLARACION ')'  ETS {}
         | 'pr_TL' '(' ETS ')'{}
@@ -328,70 +701,159 @@ ETS :   /*'(' TIPODATO_DECLARACION ')'  ETS {}
         | 'pr_TS' '(' ETS ')'{}
         | 'pr_TCA' '(' ETS ')'{}
         | COMPARACIONES {}*/
-        | E {}
+        | E { p = new listaenlazada(); p.agrega(new nodo("E")); p.agrega(new nodo($1)); $$ = p;}
         //| INSTRUCCION {}
 ; 
 
 
-IDS : IDS ',' 'id' {}
-    | 'id' {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+IDS : IDS ',' 'id' { p = $1; p.agrega(new nodo("COMA"));p.agrega(new nodo("VARIABLE")); $$ = p;}
+    | 'id' { p =new listaenlazada();p.agrega(new nodo("VARIABLE")); $$ = p;}
     ;
-COMPARACIONES: '!' '(' COMPARACIONES ')' {}
-            |  COMPARACIONES '&&' COMP {}
-            |  COMPARACIONES '||' COMP {}
-            |   COMP  {} 
+
+
+
+
+
+
+
+
+
+
+
+COMPARACIONES: '!' '(' COMPARACIONES ')' { p = new listaenlazada(); p.agrega(new nodo("NOT")); p.agrega(new nodo("ABRE_PARENTESIS"));  p.concatena($3); p.agrega(new nodo("CIERRA_PARENTESIS_PARENTESIS"));$$ = p;}
+            |  COMPARACIONES '&&' COMP { p = $1; p.agrega(new nodo("AND")); p.concatena($3);  $$ = p;}
+            |  COMPARACIONES '||' COMP { p = $1; p.agrega(new nodo("OR")); p.concatena($3);  $$ = p;}
+            |   COMP  { p = $1; $$ = p;} 
 ;
-COMP:  E '<' E {}
-    |  E '>''=' E  {}
-    |  E '<''=' E  {}
-    |  E '>' E     {}
-    |  E '!''=' E   {}
-    |  E '=''=' E   {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMP:  E '<' E { p = $1; p.agrega(new nodo("ES_MENOR")); p.concatena($3);  $$ = p;}
+    |  E '>''=' E  { p = $1; p.agrega(new nodo("ES_MAYOR_IGUAL")); p.concatena($4);  $$ = p;}
+    |  E '<''=' E  { p = $1; p.agrega(new nodo("ES_MENOR_IGUAL")); p.concatena($4);  $$ = p;}
+    |  E '>' E     { p = $1; p.agrega(new nodo("ES_MAYOR")); p.concatena($3);  $$ = p;}
+    |  E '!''=' E   { p = $1; p.agrega(new nodo("ES_DIFERENTE")); p.concatena($4);  $$ = p;}
+    |  E '=''=' E   { p = $1; p.agrega(new nodo("ES_IGUAL")); p.concatena($4);  $$ = p;}
 ;
 
 
 
-E: E '+' Term {}
-|E '-' Term {}
-|'-' Term {}
-| AUMENTO {}
+
+
+
+
+
+
+
+
+
+
+
+
+E: E '+' Term { p = $1; p.agrega(new nodo("MAS")); p.concatena($3);  $$ = p;}
+|E '-' Term { p = $1; p.agrega(new nodo("MENOS")); p.concatena($3);  $$ = p;}
+|'-' Term {p = new listaenlazada(); p.agrega(new nodo("MENOS"));  p.concatena($2); $$ = p;}
+| AUMENTO {$$=$1}
 //| E '-' '-' {}
 //|CALL {}
-|Term  {}
-;
-
-Term: Term '*' Factor {}
-|Term '/' Factor {}
-| Term '%' Factor  {}
-|  Term '^' '[' E ']' {}
-|Factor {}
+|Term  {$$=$1}
 ;
 
 
 
 
-Factor: '(' E ')' 
-    | F
+
+
+
+
+
+
+
+
+Term: Term '*' Factor { p = $1; p.agrega(new nodo("POR")); p.concatena($3);  $$ = p;}
+|Term '/' Factor { p = $1; p.agrega(new nodo("DIVIDIDO")); p.concatena($3);  $$ = p;}
+| Term '%' Factor  { p = $1; p.agrega(new nodo("MOD")); p.concatena($3);  $$ = p;}
+|  Term '^' '[' E ']' { p = $1; p.agrega(new nodo("POTENCIA")); p.agrega(new nodo("ABRE_CORCHETE"));p.concatena($4);p.agrega(new nodo("CIERRA_CORCHETE"));  $$ = p;}
+|Factor {$$=$1}
+;
+
+
+
+
+
+
+
+
+
+Factor: '(' E ')'  { p = new listaenlazada();p.agrega(new nodo("ABRE_ARENTESIS"));p.concatena($2);p.agrega(new nodo("CIERRA_PARENTESIS"));$$= p;}
+    | F { FE = new listaenlazada();
+    if($1.constructor.name!="listaenlazada")
+    {
+     FE.agrega($1);
+     }
+     else
+     {
+        FE.concatena($1);
+     }
+     $$= FE;}
     
 ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 F: expreR_numero {$$= new nodo("INT");}
     | 'true' {$$= new nodo("TRUE");}
     | 'false' {$$= new nodo("FALSE");}
     |expreR_cadena {$$= new nodo("FRASE");}
     |expreR_cadenita() {$$ = new nodo("FRASECITA");}
-    |TIPODATO_DECLARACION {}
-    |CALL {}
-    |'id' '[' E ']'
-    |'id' '[' E ']''[' E ']'
-    | E  E {}
-    | 'pr_TL'  E {}
-    | 'pr_TU'  E {}
-    | 'pr_round'  E {}
-    | 'pr_len'  E {}
-    | 'pr_typeof'  E {}
-    | 'pr_TS'  E {}
-    | 'pr_TCA'  E {}
-    | COMPARACIONES {}
+    |TIPODATO_DECLARACION {$$=$1}
+    |CALL {$$=$1}
+    |'id' '[' E ']' { p = new listaenlazada();p.agrega(new nodo("VARIABLE"));p.agrega(new nodo("ABRE_CORCHETE"));p.concatena($3);p.agrega(new nodo("CIERRA_CORCHETE"));$$= p;}
+    |'id' '[' E ']''[' E ']' { p = new listaenlazada();p.agrega(new nodo("VARIABLE"));p.agrega(new nodo("ABRE_CORCHETE"));p.concatena($3);p.agrega(new nodo("CIERRA_CORCHETE"));p.agrega(new nodo("ABRE_CORCHETE"));p.concatena($6);p.agrega(new nodo("CIERRA_CORCHETE"));$$= p;}
+    | E  E { p = new listaenlazada();p.concatena($1);p.concatena($2);$$= p;}
+    | 'pr_TL'  E { p = new listaenlazada();p.agrega(new nodo("TO_LOWER"));p.concatena($2);$$= p;}
+    | 'pr_TU'  E { p = new listaenlazada();p.agrega(new nodo("TO_UPPER"));p.concatena($2);$$= p;}
+    | 'pr_round'  E { p = new listaenlazada();p.agrega(new nodo("ROUND"));p.concatena($2);$$= p;}
+    | 'pr_len'  E { p = new listaenlazada();p.agrega(new nodo("LENGTH"));p.concatena($2);$$= p;}
+    | 'pr_typeof'  E { p = new listaenlazada();p.agrega(new nodo("TYPE_OF"));p.concatena($2);$$= p;}
+    | 'pr_TS'  E { p = new listaenlazada();p.agrega(new nodo("TO_STRING"));p.concatena($2);$$= p;}
+    | 'pr_TCA'  E { p = new listaenlazada();p.agrega(new nodo("TO_CHAR_ARRAY"));p.concatena($2);$$= p;}
+    | COMPARACIONES {$$=$1}
     | 'id' {$$= new nodo("VARIABLE");}
 ;
 // INSSTRUCCION FOR

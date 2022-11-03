@@ -315,8 +315,6 @@ DECLARACION_VECTORES:TIPODATO_DECLARACION '[' ']' 'id' '=' 'pr_new' TIPODATO_DEC
 ;
 INSTANCIA: TIPODATO_DECLARACION  IDS {}
 ;
-DECLARACION_INTERNA : E IDS '=' ETS {}
-            ;
 AUMENTO : 'id' '+' '+'  {}
         | 'id' '-' '-'  {}
 ;

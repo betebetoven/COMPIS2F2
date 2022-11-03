@@ -21,37 +21,39 @@ class listaenlazada
     static general_index = 0;
      agrega( mnodo)//entra nodo
     {
-        this.tamaño += 1;
-        listaenlazada.general_index=this.tamaño;
+        
+        listaenlazada.general_index++;
         mnodo.index = listaenlazada.general_index;
         //nodo mnodo = new nodo(valor);
         if (this.tamaño==0) {
             this.First = mnodo;
             this.Last = mnodo;
-            this.First.index = 0;
+            //this.First.index = 0;
+           
         }
         else
         {
 
-            ahora = this.First;
+            var ahora = this.First;
             while (ahora.Next != null)
                 ahora = ahora.Next;
             ahora.Next = mnodo;
             ahora.Next.Prev = ahora;
             this.Last = mnodo;
         }
+        this.tamaño += 1;
         
     }
     concatena( p)//entra una lista enlazada
     {
-         c = p.First;
+        var  c = p.First;
         while (c!= null) {
             this.agrega(new nodo(c.value));
             c = c.Next;
         }
     }
     imprimirtodo( p){//aca tambien entra una listaenlazada
-         temp = p.First;
+        var  temp = p.First;
         while (temp != null)
         {
             if (temp.value.constructor.name==this.constructor.name)
