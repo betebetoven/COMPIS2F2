@@ -5,27 +5,195 @@ digraph G
         node[fillcolor = "#EEEEE"]
         node[color = "#EEEEE"]
         node[color = "#31CEF0"]
-22[label="BLOQUE_INSTRUCCIONES",fillcolor = "#CD5C5C"]
-20[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
-18[label="INSTRUCCION_DECLARACION",fillcolor = "#98FB98"]
-10[label="TIPO_DATO_DECLARACION"]
-1[label="TIPO_STRING"]
-12[label="IDS"]
-2[label="VARIABLE"]
-14[label="IGUAL"]
-15[label="ETS"]
-8[label="E"]
-7[label="FRASE"]
-17[label="PUNTO Y COMA"]
-22->20
-20->18
-18->10
-10->1
-12->2
-15->8
-8->7
-18->12
-18->14
-18->15
-18->17
+352[label="BLOQUE_INSTRUCCIONES",fillcolor = "#CD5C5C"]
+197[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+195[label="INSTRUCCION_INSTANCIA",fillcolor = "#98FB98"]
+191[label="TIPO_DATO_DECLARACION"]
+189[label="TIPO_NUMERO"]
+193[label="IDS"]
+190[label="VARIABLE"]
+207[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+205[label="INSTRUCCION_INSTANCIA",fillcolor = "#98FB98"]
+201[label="TIPO_DATO_DECLARACION"]
+199[label="TIPO_DOUBLE"]
+203[label="IDS"]
+200[label="VARIABLE"]
+217[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+215[label="INSTRUCCION_INSTANCIA",fillcolor = "#98FB98"]
+211[label="TIPO_DATO_DECLARACION"]
+209[label="TIPO_BOOLEAN"]
+213[label="IDS"]
+210[label="VARIABLE"]
+227[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+225[label="INSTRUCCION_INSTANCIA",fillcolor = "#98FB98"]
+221[label="TIPO_DATO_DECLARACION"]
+219[label="TIPO_CHAR"]
+223[label="IDS"]
+220[label="VARIABLE"]
+237[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+235[label="INSTRUCCION_INSTANCIA",fillcolor = "#98FB98"]
+231[label="TIPO_DATO_DECLARACION"]
+229[label="TIPO_STRING"]
+233[label="IDS"]
+230[label="VARIABLE"]
+249[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+247[label="INSTRUCCION_INSTANCIA",fillcolor = "#98FB98"]
+243[label="TIPO_DATO_DECLARACION"]
+239[label="TIPO_NUMERO"]
+245[label="IDS"]
+240[label="VARIABLE"]
+241[label="COMA"]
+242[label="VARIABLE"]
+261[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+259[label="INSTRUCCION_INSTANCIA",fillcolor = "#98FB98"]
+255[label="TIPO_DATO_DECLARACION"]
+251[label="TIPO_DOUBLE"]
+257[label="IDS"]
+252[label="VARIABLE"]
+253[label="COMA"]
+254[label="VARIABLE"]
+273[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+271[label="INSTRUCCION_INSTANCIA",fillcolor = "#98FB98"]
+267[label="TIPO_DATO_DECLARACION"]
+263[label="TIPO_BOOLEAN"]
+269[label="IDS"]
+264[label="VARIABLE"]
+265[label="COMA"]
+266[label="VARIABLE"]
+285[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+283[label="INSTRUCCION_INSTANCIA",fillcolor = "#98FB98"]
+279[label="TIPO_DATO_DECLARACION"]
+275[label="TIPO_CHAR"]
+281[label="IDS"]
+276[label="VARIABLE"]
+277[label="COMA"]
+278[label="VARIABLE"]
+317[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+315[label="INSTRUCCION_DECLARACION",fillcolor = "#98FB98"]
+307[label="TIPO_DATO_DECLARACION"]
+287[label="TIPO_CHAR"]
+309[label="IDS"]
+288[label="VARIABLE"]
+311[label="IGUAL"]
+312[label="ETS"]
+305[label="E"]
+301[label="TO_CHAR_ARRAY"]
+302[label="ABRE_ARENTESIS"]
+303[label="FRASE"]
+304[label="CIERRA_PARENTESIS"]
+314[label="PUNTO Y COMA"]
+329[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+327[label="INSTRUCCION_INSTANCIA",fillcolor = "#98FB98"]
+323[label="TIPO_DATO_DECLARACION"]
+319[label="TIPO_STRING"]
+325[label="IDS"]
+320[label="VARIABLE"]
+321[label="COMA"]
+322[label="VARIABLE"]
+350[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+348[label="INSTRUCCION_DECLARACION",fillcolor = "#98FB98"]
+340[label="TIPO_DATO_DECLARACION"]
+331[label="TIPO_NUMERO"]
+342[label="IDS"]
+332[label="VARIABLE"]
+344[label="IGUAL"]
+345[label="ETS"]
+338[label="E"]
+337[label="INT"]
+347[label="PUNTO Y COMA"]
+352->197
+197->195
+195->191
+191->189
+193->190
+195->193
+207->205
+205->201
+201->199
+203->200
+205->203
+217->215
+215->211
+211->209
+213->210
+215->213
+227->225
+225->221
+221->219
+223->220
+225->223
+237->235
+235->231
+231->229
+233->230
+235->233
+249->247
+247->243
+243->239
+245->240
+245->241
+245->242
+247->245
+261->259
+259->255
+255->251
+257->252
+257->253
+257->254
+259->257
+273->271
+271->267
+267->263
+269->264
+269->265
+269->266
+271->269
+285->283
+283->279
+279->275
+281->276
+281->277
+281->278
+283->281
+317->315
+315->307
+307->287
+309->288
+312->305
+305->301
+305->302
+305->303
+305->304
+315->309
+315->311
+315->312
+315->314
+329->327
+327->323
+323->319
+325->320
+325->321
+325->322
+327->325
+350->348
+348->340
+340->331
+342->332
+345->338
+338->337
+348->342
+348->344
+348->345
+348->347
+352->207
+352->217
+352->227
+352->237
+352->249
+352->261
+352->273
+352->285
+352->317
+352->329
+352->350
  }

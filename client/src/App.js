@@ -39,12 +39,15 @@ export default App
 import React, { Component } from 'react'
 import './App.css'
 import PostForm from './components/PostForm'
+import PostForm2 from './components/PostForm2'
 
 class App extends Component {
 	render() {
 		return (
 			<div className="App">
 				<PostForm />
+				{/* <PostList /> */}
+        <PostForm2 />
 				{/* <PostList /> */}
 			</div>
 		)

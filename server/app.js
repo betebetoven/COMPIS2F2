@@ -63,21 +63,8 @@ app.get('/getincremental', function (req, res){
 
     res.json({incremental: incremental});
 })
-//var bodyParser = require('body-parser');
-//const { text } = require("body-parser");
-//app.use(bodyParser.text());
 app.post('/setIncremental', function(req,res){
-    //body hace referncia a un objeto json y el punto marca a que parte del objeto se refiere
-    //incremental = req.body.incremental
     var texto = req.body.texto
-    
-    /*fs.writeFile('./entrada.txt', texto, err => {
-        if (err) {
-          console.error(err);
-        }
-        // file written successfully
-      });*/
-    //console.log("Received:"+require('util').inspect(req.body,{depth:null}));
     console.log(texto)
     var salida = arbol_graf.parse(texto).toString();
     fs.writeFile('./salida_graphviz.txt', salida, err => {
@@ -90,5 +77,37 @@ app.post('/setIncremental', function(req,res){
     incremental: incremental,
     salida : salida
     })
+
+})
+app.post('/gramaticarlos', function(req,res){
+    var env_padre = new Environment(null);
+    var texto = req.body.texto
+    console.log(texto)
+    const ast = parser.parse(texto);
+        for (const elemento  of ast) {
+            try {
+                
+                //preguntar si ese elemtno es de clase metodo o funciones
+                
+                    elemento.executar(env_padre)
+                
+            } catch (error) {
+                //console.log(error);
+                
+            }
+        }
+        const obj = Object.fromEntries(env_padre.tablaSimbolos);
+        
+       
+        
+        res.json({status: "ok",
+        incremental: incremental,
+        salida : obj,
+        consola: consola.cons
+
+        })
+        consola.cons = "";
+            
+            //res.toString(consola.cons)
 
 })
