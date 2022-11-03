@@ -89,7 +89,7 @@ case 1:
                                 p.agrega(new nodo($$[$0-1])); 
                                 p.ver(p,"");
                                 var sale = p.g(); 
-                                
+                                return sale;
                                 
 break;
 case 2:

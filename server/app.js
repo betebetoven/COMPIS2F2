@@ -9,7 +9,9 @@ var arbol_graf = require('./arbol_graficado.js');
 
 
 var app = express();
+var cors = require('cors')
 
+app.use(cors()) // Use this after the variable declaration
 
 app.use(morgan('dev'));
 app.use(express.json())
@@ -61,12 +63,32 @@ app.get('/getincremental', function (req, res){
 
     res.json({incremental: incremental});
 })
+//var bodyParser = require('body-parser');
+//const { text } = require("body-parser");
+//app.use(bodyParser.text());
 app.post('/setIncremental', function(req,res){
     //body hace referncia a un objeto json y el punto marca a que parte del objeto se refiere
-    incremental = req.body.incremental
+    //incremental = req.body.incremental
     var texto = req.body.texto
+    
+    /*fs.writeFile('./entrada.txt', texto, err => {
+        if (err) {
+          console.error(err);
+        }
+        // file written successfully
+      });*/
+    //console.log("Received:"+require('util').inspect(req.body,{depth:null}));
+    console.log(texto)
+    var salida = arbol_graf.parse(texto).toString();
+    fs.writeFile('./salida_graphviz.txt', salida, err => {
+        if (err) {
+          console.error(err);
+        }
+        // file written successfully
+      });
     res.json({status: "ok",
-    incremental: incremental
+    incremental: incremental,
+    salida : salida
     })
 
 })

@@ -162,7 +162,7 @@ INIT: INSTRUCCIONES    EOF { p = new listaenlazada();
                                 p.agrega(new nodo($1)); 
                                 p.ver(p,"");
                                 var sale = p.g(); 
-                                
+                                return sale;
                                 }
  ;
 

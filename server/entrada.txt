@@ -1,21 +1,12 @@
 /**
-
-    Organizacion de lenguajes y compiladores 1 
-    Segundo semestre 2022
-    Universidad San Carlos de Guatemala
-
+Organizacion de lenguajes y compiladores 1
+Segundo semestre 2022
+Universidad San Carlos de Guatemala
 ****/
-
 //Seccion de declaraciones
-
-
 int a,b,c;
 int la,le,li =2+10;
 la = (la)+20*5+(la++)-1;
 la++;
-
-
-
-
-
-
+int pedro = "mi mama me ama"+"mucho";
+la++;

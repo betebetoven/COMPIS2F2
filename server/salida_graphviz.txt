@@ -1,0 +1,31 @@
+digraph G
+{label="expresion regular"
+        node[shape = octagon]
+        node[style = filled]
+        node[fillcolor = "#EEEEE"]
+        node[color = "#EEEEE"]
+        node[color = "#31CEF0"]
+22[label="BLOQUE_INSTRUCCIONES",fillcolor = "#CD5C5C"]
+20[label="BLOQUE_INSTRUCCION",fillcolor = "#FFC0CB"]
+18[label="INSTRUCCION_DECLARACION",fillcolor = "#98FB98"]
+10[label="TIPO_DATO_DECLARACION"]
+1[label="TIPO_STRING"]
+12[label="IDS"]
+2[label="VARIABLE"]
+14[label="IGUAL"]
+15[label="ETS"]
+8[label="E"]
+7[label="FRASE"]
+17[label="PUNTO Y COMA"]
+22->20
+20->18
+18->10
+10->1
+12->2
+15->8
+8->7
+18->12
+18->14
+18->15
+18->17
+ }
