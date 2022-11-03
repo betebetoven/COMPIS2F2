@@ -88,7 +88,7 @@ case 1:
                                 p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
                                 p.agrega(new nodo($$[$0-1])); 
                                 p.ver(p,"");
-                                //var sale = p.g(); 
+                                var sale = p.g(); 
                                 
                                 
 break;
@@ -550,7 +550,7 @@ break;
 case 65:
  p = new listaenlazada();
                                         p.agrega(new nodo("IDS"));
-                                        p.agrega($$[$0-3]);
+                                        p.agrega(new nodo($$[$0-3]));
                                         p.agrega(new nodo("IGUAL"));
                                         p.agrega(new nodo("ETS"));
                                         p.agrega(new nodo($$[$0-1]));
@@ -562,7 +562,7 @@ case 66:
                                         p.agrega(new nodo("VARIABLE"));
                                         p.agrega(new nodo("ABRE CORCHETE"));
                                         p.agrega(new nodo("E"));
-                                        p.agrega($$[$0-4]);
+                                        p.agrega(new nodo($$[$0-4]));
                                         p.agrega(new nodo("CIERRA CORCHETE"));
                                         p.agrega(new nodo("IGUAL"));
                                         p.agrega(new nodo("ETS"));
@@ -575,11 +575,11 @@ case 67:
                                         p.agrega(new nodo("VARIABLE"));
                                         p.agrega(new nodo("ABRE CORCHETE"));
                                         p.agrega(new nodo("E"));
-                                        p.agrega($$[$0-7]);
+                                        p.agrega(new nodo($$[$0-7]));
                                         p.agrega(new nodo("CIERRA CORCHETE"));
                                         p.agrega(new nodo("ABRE CORCHETE"));
                                         p.agrega(new nodo("E"));
-                                        p.agrega($$[$0-4]);
+                                        p.agrega(new nodo($$[$0-4]));
                                         p.agrega(new nodo("CIERRA CORCHETE"));
                                         p.agrega(new nodo("IGUAL"));
                                         p.agrega(new nodo("ETS"));

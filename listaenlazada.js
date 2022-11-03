@@ -83,7 +83,7 @@ class listaenlazada
                 var aptd = c.value.First; // 
                 while (aptd != null)
                 {
-                    if (aptd.value.constructor.name != listaexemple.constructor.name) {
+                    if (aptd.value.constructor.name == "String") {
 
                        
                         if (!this.rep.includes("\n" + x.index + "->" + aptd.index)) {
