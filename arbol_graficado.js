@@ -146,6 +146,73 @@ break;
 case 22:
  console.log("Error sintactico en la linea"+(yylineno+1)); 
 break;
+case 42:
+ p = new listaenlazada(); 
+                                                    p.agrega(new nodo("VARIABLE")); 
+                                                    p.concatena($$[$0-5]);
+                                                    p.agrega(new nodo("DOS_PUNTOS")); 
+                                                    p.agrega(new nodo("TIPO_DATO")); 
+                                                    p.agrega(new nodo($$[$0-3]));
+                                                    p.agrega(new nodo("ABRE_LLAVE")); 
+                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                    p.agrega(new nodo($$[$0-1]));
+                                                    p.agrega(new nodo("CIERRA_LLAVE"));
+                                                    this.$ = p;
+break;
+case 43:
+ p = new listaenlazada(); 
+                                                    p.agrega(new nodo("VARIABLE")); 
+                                                    p.concatena($$[$0-5]);
+                                                    p.agrega(new nodo("DOS_PUNTOS")); 
+                                                    p.agrega(new nodo("VOID")); 
+                                                    p.agrega(new nodo("ABRE_LLAVE")); 
+                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                    p.agrega(new nodo($$[$0-1]));
+                                                    p.agrega(new nodo("CIERRA_LLAVE"));
+                                                    this.$ = p;
+break;
+case 44:
+ p = new listaenlazada(); 
+                                                    p.agrega(new nodo("VARIABLE")); 
+                                                    p.concatena($$[$0-3]);
+                                                    p.agrega(new nodo("ABRE_LLAVE")); 
+                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                    p.agrega(new nodo($$[$0-1]));
+                                                    p.agrega(new nodo("CIERRA_LLAVE"));
+                                                    this.$ = p;
+break;
+case 45:
+ p = new listaenlazada();
+                            p.agrega(new nodo("ABRE_PARENTESIS"));
+                            p.agrega(new nodo("PARAMETROS")); 
+                            p.agrega(new nodo($$[$0-1])); 
+                            p.agrega(new nodo("CIERRA_PARENTESIS"));
+                            this.$ = p;
+                            
+break;
+case 46:
+ p = $$[$0-2]; 
+                        p.agrega(new nodo("COMA"));
+                        p.agrega(new nodo("PAR")); 
+                        p.agrega(new nodo($$[$0]));  
+                        this.$ = p;
+                        
+break;
+case 47:
+ p =new listaenlazada();
+                p.agrega(new nodo("PAR")); 
+                p.agrega(new nodo($$[$0])); 
+                this.$ = p;
+                
+break;
+case 48:
+ p =new listaenlazada();
+                                    p.agrega(new nodo("TIPO_DATO")); 
+                                    p.agrega(new nodo($$[$0-1]));
+                                    p.agrega(new nodo("VARIABLE")); 
+                                    this.$ = p;
+                                    
+break;
 case 49:
  p = new listaenlazada();
                             p.agrega(new nodo("ABRE_PARENTESIS"));

@@ -229,17 +229,69 @@ IFANIDADOS : IFANIDADOS  'pr_elif' '(' ETS ')'  '{' INSTRUCCIONES '}' {}
 
 
 
+
+
+
+
+
 //FUNCIONES Y METODOS CON PARAMETROS
-FUNCION: 'id' PARAMETROS ':'  TIPODATO_DECLARACION '{' INSTRUCCIONES '}'
+FUNCION: 'id' PARAMETROS ':'  TIPODATO_DECLARACION '{' INSTRUCCIONES '}'{ p = new listaenlazada(); 
+                                                    p.agrega(new nodo("VARIABLE")); 
+                                                    p.concatena($2);
+                                                    p.agrega(new nodo("DOS_PUNTOS")); 
+                                                    p.agrega(new nodo("TIPO_DATO")); 
+                                                    p.agrega(new nodo($4));
+                                                    p.agrega(new nodo("ABRE_LLAVE")); 
+                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                    p.agrega(new nodo($6));
+                                                    p.agrega(new nodo("CIERRA_LLAVE"));
+                                                    $$ = p;}
 ;
-METODO : 'id' PARAMETROS ':' 'pr_void'  '{' INSTRUCCIONES '}'
-        | 'id' PARAMETROS   '{' INSTRUCCIONES '}'
+METODO : 'id' PARAMETROS ':' 'pr_void'  '{' INSTRUCCIONES '}'{ p = new listaenlazada(); 
+                                                    p.agrega(new nodo("VARIABLE")); 
+                                                    p.concatena($2);
+                                                    p.agrega(new nodo("DOS_PUNTOS")); 
+                                                    p.agrega(new nodo("VOID")); 
+                                                    p.agrega(new nodo("ABRE_LLAVE")); 
+                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                    p.agrega(new nodo($6));
+                                                    p.agrega(new nodo("CIERRA_LLAVE"));
+                                                    $$ = p;}
+        | 'id' PARAMETROS   '{' INSTRUCCIONES '}'{ p = new listaenlazada(); 
+                                                    p.agrega(new nodo("VARIABLE")); 
+                                                    p.concatena($2);
+                                                    p.agrega(new nodo("ABRE_LLAVE")); 
+                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                    p.agrega(new nodo($4));
+                                                    p.agrega(new nodo("CIERRA_LLAVE"));
+                                                    $$ = p;}
 ;
-PARAMETROS : '(' PARS ')' 
+
+
+
+
+PARAMETROS : '(' PARS ')' { p = new listaenlazada();
+                            p.agrega(new nodo("ABRE_PARENTESIS"));
+                            p.agrega(new nodo("PARAMETROS")); 
+                            p.agrega(new nodo($2)); 
+                            p.agrega(new nodo("CIERRA_PARENTESIS"));
+                            $$ = p;
+                            }
 ;
-PARS : PARS ',' PAR
-     | PAR          
+PARS : PARS ',' PAR { p = $1; 
+                        p.agrega(new nodo("COMA"));
+                        p.agrega(new nodo("PAR")); 
+                        p.agrega(new nodo($3));  
+                        $$ = p;
+                        }
+     | PAR     { p =new listaenlazada();
+                p.agrega(new nodo("PAR")); 
+                p.agrega(new nodo($1)); 
+                $$ = p;
+                }     
 ;
+
+
 PAR : TIPODATO_DECLARACION  'id' { p =new listaenlazada();
                                     p.agrega(new nodo("TIPO_DATO")); 
                                     p.agrega(new nodo($1));
