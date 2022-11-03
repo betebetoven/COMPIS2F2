@@ -157,55 +157,187 @@ cadenita "'" [^']* "'"
  
  
 //GENERAL INSTRUCCIONES 
-INIT: INSTRUCCIONES    EOF {} ;
+INIT: INSTRUCCIONES    EOF { p = new listaenlazada(); 
+                                p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                p.agrega(new nodo($1)); 
+                                p.ver(p,"");
+                                //var sale = p.g(); 
+                                
+                                }
+ ;
 
 
-INSTRUCCIONES :   INSTRUCCIONES INSTRUCCION {  console.log("s ")}
-              |   INSTRUCCION               { console.log("s ") }
+INSTRUCCIONES :   INSTRUCCIONES INSTRUCCION { p = $1; 
+                                                p.agrega(new nodo("BLOQUE_INSTRUCCION")); 
+                                                p.agrega(new nodo($2)); 
+                                                $$ = p;}
+              |   INSTRUCCION               { p = new listaenlazada(); 
+                                                p.agrega(new nodo("BLOQUE_INSTRUCCION")); 
+                                                p.agrega(new nodo($1));
+                                                $$ = p; }
               ;
 
 
-INSTRUCCION : DECLARACION   { console.log("reconocio declaracion ") } 
-            | IMPRIMIR      { console.log("reconocio PRINT ") } 
-            | IMPRIMIRLN    { console.log("reconocio PRINTLN ") } 
-            | ASIGNACION    { console.log("reconocio asignacion ") }
-            | METODO        {  console.log("reconocio metodo")}
-            | FUNCION       { console.log("reconocio funcion") }
-            | METODOsp        {  console.log("reconocio metodo sin parametros")}
-            | FUNCIONsp       { console.log("reconocio funcion sin parametros") }
-            | CONDICIONIF   { console.log("reconocio condicion if") } 
-            | CICLO         {console.log("reconocio  ciclo")}
-            | RETURN   {console.log("reconocio  RETURN")}
-            | CALL ';'     {console.log("reconocio  LLAMADA")}
-            | SWITCH    {console.log("reconocio sentencia SWITCH")}
-            | BREAK     {console.log("reconocio sentencia BREAK")}
-            | CONTINUE     {console.log("reconocio sentencia CONTINUE")}
-            | AUMENTO ';'   {console.log("reconocio sentencia AUMENTO")}
-            | INSTANCIA ';'   {console.log("reconocio sentencia INSTANCIA")}
-            |DECLARACION_VECTORES {console.log("reconocio sentencia DECLARACION VECTOR")}
+INSTRUCCION : DECLARACION   { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_DECLARACION")); p.agrega(new nodo($1));$$ = p;}
+            | IMPRIMIR      { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_PRINT")); p.agrega(new nodo($1));$$ = p;}
+            | IMPRIMIRLN    { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_PRINTLN")); p.agrega(new nodo($1));$$ = p;}
+            | ASIGNACION    { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_ASIGNACION")); p.agrega(new nodo($1));$$ = p;}
+            | METODO        { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_METODO")); p.agrega(new nodo($1));$$ = p;}
+            | FUNCION       { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_FUNCION")); p.agrega(new nodo($1));$$ = p;}
+            | METODOsp      { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_METODOSP")); p.agrega(new nodo($1));$$ = p;}
+            | FUNCIONsp     { p = new listaenlazada(); p.agrega(new nodo("FUNCIONSP")); p.agrega(new nodo($1));$$ = p;}
+            | CONDICIONIF   { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_IF")); p.agrega(new nodo($1));$$ = p;} 
+            | CICLO         { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_CICLO")); p.agrega(new nodo($1));$$ = p;}
+            | RETURN        { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_RETURN")); p.agrega(new nodo($1));$$ = p;}
+            | CALL ';'      { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_LLAMADA")); p.agrega(new nodo($1));$$ = p;}
+            | SWITCH        { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_SWITCH")); p.agrega(new nodo($1));$$ = p;}
+            | BREAK         { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_BREAK")); $$ = p;}
+            | CONTINUE      { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_CONTINUE")); $$ = p;}
+            | AUMENTO ';'   { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_AUMENTO")); p.agrega(new nodo($1));$$ = p;}
+            | INSTANCIA ';' { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_INSTANCIA")); p.agrega(new nodo($1));$$ = p;}
+            |DECLARACION_VECTORES { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_DECLARACIONVECTORES")); p.agrega(new nodo($1));$$ = p;}
             | error    ';'  { console.log("Error sintactico en la linea"+(yylineno+1)); }
 ;
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
-CICLO: 'pr_for'  '(' DECLARACION ETS ';'  ETS ')' '{' INSTRUCCIONES '}'  {}
-    | 'pr_for' '('  ASIGNACION ETS ';'  ETS   ')'  '{' INSTRUCCIONES '}'  {}
-    |'pr_for'  '(' DECLARACION ETS ';'  ASIGNACION ')' '{' INSTRUCCIONES '}'  {}
-    | 'pr_for' '('  ASIGNACION ETS ';'  ASIGNACION   ')'  '{' INSTRUCCIONES '}'  {}
-    | 'pr_while' '(' ETS ')' '{' INSTRUCCIONES '}'  {}
-    | 'pr_do' '{' INSTRUCCIONES '}' 'pr_while' '(' ETS ')' ';' {}
-    | 'pr_do' '{' INSTRUCCIONES '}' 'pr_until' '(' ETS ')' ';' {}
+CICLO: 'pr_for'  '(' DECLARACION ETS ';'  ETS ')' '{' INSTRUCCIONES '}'  { p = new listaenlazada(); 
+                                                                                    p.agrega(new nodo("FOR"));
+                                                                                    p.agrega(new nodo("DECLARACION"));
+                                                                                    p.agrega(new nodo($3));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                     p.agrega(new nodo($4));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                    p.agrega(new nodo($6));
+                                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                                    p.agrega(new nodo($9));
+                                                                                    $$=p;}
+    | 'pr_for' '('  ASIGNACION ETS ';'  ETS   ')'  '{' INSTRUCCIONES '}'  { p = new listaenlazada(); 
+                                                                                    p.agrega(new nodo("FOR"));
+                                                                                    p.agrega(new nodo("ASIGNACION"));
+                                                                                    p.agrega(new nodo($3));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                     p.agrega(new nodo($4));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                    p.agrega(new nodo($6));
+                                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                                    p.agrega(new nodo($9));
+                                                                                    $$=p;}
+    |'pr_for'  '(' DECLARACION ETS ';'  ASIGNACION ')' '{' INSTRUCCIONES '}'  { p = new listaenlazada(); 
+                                                                                    p.agrega(new nodo("FOR"));
+                                                                                    p.agrega(new nodo("DECLARACION"));
+                                                                                    p.agrega(new nodo($3));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                     p.agrega(new nodo($4));
+                                                                                    p.agrega(new nodo("ASIGNACION"));
+                                                                                    p.agrega(new nodo($6));
+                                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                                    p.agrega(new nodo($9));
+                                                                                    $$=p;}
+    | 'pr_for' '('  ASIGNACION ETS ';'  ASIGNACION   ')'  '{' INSTRUCCIONES '}'  { p = new listaenlazada(); 
+                                                                                    p.agrega(new nodo("FOR"));
+                                                                                    p.agrega(new nodo("ASIGNACION"));
+                                                                                    p.agrega(new nodo($3));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                     p.agrega(new nodo($4));
+                                                                                    p.agrega(new nodo("ASIGNACION"));
+                                                                                    p.agrega(new nodo($6));
+                                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                                    p.agrega(new nodo($9));
+                                                                                    $$=p;}
+    | 'pr_while' '(' ETS ')' '{' INSTRUCCIONES '}'  { p = new listaenlazada(); 
+                                                        p.agrega(new nodo("WHILE"));
+                                                        p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                        p.agrega(new nodo("ETS"));
+                                                        p.agrega(new nodo($3));
+                                                        p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                        p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                        p.agrega(new nodo($6));
+                                                        $$=p;}
+    | 'pr_do' '{' INSTRUCCIONES '}' 'pr_while' '(' ETS ')' ';' { p = new listaenlazada(); 
+                                                                    p.agrega(new nodo("DO"));
+                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                    p.agrega(new nodo($3));
+                                                                    p.agrega(new nodo("WHILE"));
+                                                                    p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                                    p.agrega(new nodo("ETS"));
+                                                                    p.agrega(new nodo($7));
+                                                                    p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                                    p.agrega(new nodo("PUNTO_Y_COMA"));
+                                                                    $$=p;}
+    | 'pr_do' '{' INSTRUCCIONES '}' 'pr_until' '(' ETS ')' ';' { p = new listaenlazada(); 
+                                                                    p.agrega(new nodo("DO"));
+                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                    p.agrega(new nodo($3));
+                                                                    p.agrega(new nodo("UNTIL"));
+                                                                    p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                                    p.agrega(new nodo("ETS"));
+                                                                    p.agrega(new nodo($7));
+                                                                    p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                                    p.agrega(new nodo("PUNTO_Y_COMA"));
+                                                                    $$=p;}
     ;
 
-SWITCH : 'pr_switch' '(' 'id' ')' '{' OPCIONES 'pr_default' ':' '{' INSTRUCCIONES '}' '}' {}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SWITCH : 'pr_switch' '(' 'id' ')' '{' OPCIONES 'pr_default' ':' '{' INSTRUCCIONES '}' '}' { p = new listaenlazada();
+                                                                                            p.agrega(new nodo("SWITCH"));
+                                                                                            p.agrega(new nodo("VARIABLE"));
+                                                                                            p.agrega(new nodo("OPCIONES"));
+                                                                                            p.agrega(new nodo($6));
+                                                                                            p.agrega(new nodo("DEFAULT"));
+                                                                                            p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                                            p.agrega(new nodo($10));
+                                                                                            $$=p;}
 ;
-OPCIONES: OPCIONES OPCION  {}
-            | OPCION  {}
+OPCIONES: OPCIONES OPCION  { p = $1;
+                                p.agrega(new nodo("OPCION"));
+                                p.agrega(new nodo($2));
+                                $$ = p;
+                                }
+            | OPCION  { p = new listaenlazada();
+                        p.agrega(new nodo("OPCION"));
+                        p.agrega(new nodo($1));
+                        $$ = p;}
 ;
-OPCION : 'pr_case'  ETS  ':' '{' INSTRUCCIONES '}' {}
+OPCION : 'pr_case'  ETS  ':' '{' INSTRUCCIONES '}' { p = new listaenlazada(); 
+                                                        p.agrega(new nodo("CASE"));
+                                                        p.agrega(new nodo("ETS"));
+                                                        p.agrega(new nodo($2));
+                                                        p.agrega(new nodo("DOS_PUNTOS"));
+                                                        p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                        p.agrega(new nodo($5));
+                                                        $$ = p;}
 ;
+
+
+
+
+
+
+
+
+
+
+
+
 
 BREAK: 'pr_break' ';' {}
 ;
-CONTINUE: 'pr_continue' ';' {}
+CONTINUE: 'pr_continue' ';' 
 ;
 
 
@@ -215,13 +347,55 @@ CONTINUE: 'pr_continue' ';' {}
 
 //CONDICION IF
 
-CONDICIONIF: 'pr_if' '(' ETS ')'  '{' INSTRUCCIONES '}'  {}
-                | 'pr_if' '(' ETS ')'  '{' INSTRUCCIONES '}' IFANIDADOS {}
+CONDICIONIF: 'pr_if' '(' ETS ')'  '{' INSTRUCCIONES '}'  { p = new listaenlazada(); 
+                                                            p.agrega(new nodo("IF"));
+                                                            p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                            p.agrega(new nodo("ETS")); 
+                                                            p.agrega(new nodo($3)); 
+                                                            p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                            p.agrega(new nodo("ENTONCES"));
+                                                            p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                            p.agrega(new nodo($6));
+                                                            $$ = p;}
+                | 'pr_if' '(' ETS ')'  '{' INSTRUCCIONES '}' IFANIDADOS { p = new listaenlazada(); 
+                                                                            p.agrega(new nodo("IF"));
+                                                                            p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                                            p.agrega(new nodo("ETS")); 
+                                                                            p.agrega(new nodo($3)); 
+                                                                            p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                                            p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                                            p.agrega(new nodo($6));
+                                                                            p.concatena($8);
+                                                                            $$ = p;}
 ;
-IFANIDADOS : IFANIDADOS  'pr_elif' '(' ETS ')'  '{' INSTRUCCIONES '}' {}
-                | IFANIDADOS  'pr_else' '{' INSTRUCCIONES '}' {}
-                |  'pr_elif' '(' ETS ')'  '{' INSTRUCCIONES '}' {}
-                | 'pr_else' '{' INSTRUCCIONES '}' {}
+IFANIDADOS : IFANIDADOS  'pr_elif' '(' ETS ')'  '{' INSTRUCCIONES '}' { p =$1;
+                                                                        p.agrega(new nodo("ELSE_IF"));
+                                                                        p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                                        p.agrega(new nodo("ETS")); 
+                                                                        p.agrega(new nodo($4)); 
+                                                                        p.agrega(new nodo("CIERRA_PARENTESIS_PARENTESIS"));
+                                                                        p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                        p.agrega(new nodo($7));
+                                                                        $$=p;}
+                | IFANIDADOS  'pr_else' '{' INSTRUCCIONES '}' { p = $1;
+                                                                p.agrega(new nodo("ELSE"));
+                                                                p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                p.agrega(new nodo($4));
+                                                                $$=p;}
+                |  'pr_elif' '(' ETS ')'  '{' INSTRUCCIONES '}' { p = new listaenlazada();
+                                                                    p.agrega(new nodo("ELSE_IF"));
+                                                                    p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                                    p.agrega(new nodo("ETS")); 
+                                                                    p.agrega(new nodo($3)); 
+                                                                    p.agrega(new nodo("CIERRA_PARENTESIS_PARENTESIS"));
+                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                    p.agrega(new nodo($6));
+                                                                    $$=p;}
+                | 'pr_else' '{' INSTRUCCIONES '}' {p = new listaenlazada();
+                                                    p.agrega(new nodo("ELSE"));
+                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                    p.agrega(new nodo($3));
+                                                    $$=p;}
 ;
 
 

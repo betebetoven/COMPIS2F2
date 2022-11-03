@@ -86,15 +86,15 @@ class listaenlazada
                     if (aptd.value.constructor.name != listaexemple.constructor.name) {
 
                        
-                        if (!rep.includes("\n" + x.index + "->" + aptd.index)) {
+                        if (!this.rep.includes("\n" + x.index + "->" + aptd.index)) {
                             this.conexiones += "\n" + x.index + "->" + aptd.index;
-                            rep.push("\n" + x.index + "->" + aptd.index);
+                            this.rep.push("\n" + x.index + "->" + aptd.index);
                         }
                     }
                     else {
 
                         
-                        v(aptd.Prev, aptd);
+                        this.v(aptd.Prev, aptd);
                     }
                     aptd=aptd.Next;
                 }
@@ -108,6 +108,28 @@ class listaenlazada
 
 
     }
+    ver(entrada, aumento)
+    {
+        var aumento2 = aumento;
+        console.log(aumento+"[");
+        var k = entrada.First;
+        while(k!= null)
+        {
+            if(k.value.constructor.name =="String")
+            {
+                console.log(aumento2+k.value);
+            }
+            else
+            {
+                aumento+="      ";
+                this.ver(k.value,aumento);
+            }
+            k = k.Next;
+
+        }
+        console.log(aumento2+"]");
+
+    }
      g()
     {
         this.completo = "digraph G\n" +
@@ -118,9 +140,9 @@ class listaenlazada
                 "        node[color = \"#EEEEE\"]\n" +
                 "        node[color = \"#31CEF0\"]";
         this.conexiones = "";
-        pepe = "";
-        v(this.First,this.First.Next);
-        imprimirtodo(this);
+        var pepe = "";
+        this.v(this.First,this.First.Next);
+        this.imprimirtodo(this);
 
 
         console.log(this.completo+this.conexiones+"\n }")

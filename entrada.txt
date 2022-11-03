@@ -2,10 +2,10 @@
 
 int varible1,a,b,c;
 print("rorjo");
-b = 25*10+5+a();
+/*b = 25*10+5+a();
 a[10]=24;
 a = (int)"bebecitabebelim";
 int [] p = new int[10];
 int [] j = {1,2,3,4};
 int [][]j = {{1,2},{3,4}};
-return(e);
+return(e);*/

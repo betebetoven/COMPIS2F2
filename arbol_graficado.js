@@ -83,68 +83,266 @@ performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* actio
 
 var $0 = $$.length - 1;
 switch (yystate) {
+case 1:
+ p = new listaenlazada(); 
+                                p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                p.agrega(new nodo($$[$0-1])); 
+                                p.ver(p,"");
+                                //var sale = p.g(); 
+                                
+                                
+break;
 case 2:
-  console.log("s ")
+ p = $$[$0-1]; 
+                                                p.agrega(new nodo("BLOQUE_INSTRUCCION")); 
+                                                p.agrega(new nodo($$[$0])); 
+                                                this.$ = p;
 break;
 case 3:
- console.log("s ") 
+ p = new listaenlazada(); 
+                                                p.agrega(new nodo("BLOQUE_INSTRUCCION")); 
+                                                p.agrega(new nodo($$[$0]));
+                                                this.$ = p; 
 break;
 case 4:
- console.log("reconocio declaracion ") 
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_DECLARACION")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 5:
- console.log("reconocio PRINT ") 
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_PRINT")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 6:
- console.log("reconocio PRINTLN ") 
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_PRINTLN")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 7:
- console.log("reconocio asignacion ") 
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_ASIGNACION")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 8:
-  console.log("reconocio metodo")
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_METODO")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 9:
- console.log("reconocio funcion") 
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_FUNCION")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 10:
-  console.log("reconocio metodo sin parametros")
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_METODOSP")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 11:
- console.log("reconocio funcion sin parametros") 
+ p = new listaenlazada(); p.agrega(new nodo("FUNCIONSP")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 12:
- console.log("reconocio condicion if") 
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_IF")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 13:
-console.log("reconocio  ciclo")
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_CICLO")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 14:
-console.log("reconocio  RETURN")
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_RETURN")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 15:
-console.log("reconocio  LLAMADA")
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_LLAMADA")); p.agrega(new nodo($$[$0-1]));this.$ = p;
 break;
 case 16:
-console.log("reconocio sentencia SWITCH")
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_SWITCH")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 17:
-console.log("reconocio sentencia BREAK")
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_BREAK")); this.$ = p;
 break;
 case 18:
-console.log("reconocio sentencia CONTINUE")
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_CONTINUE")); this.$ = p;
 break;
 case 19:
-console.log("reconocio sentencia AUMENTO")
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_AUMENTO")); p.agrega(new nodo($$[$0-1]));this.$ = p;
 break;
 case 20:
-console.log("reconocio sentencia INSTANCIA")
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_INSTANCIA")); p.agrega(new nodo($$[$0-1]));this.$ = p;
 break;
 case 21:
-console.log("reconocio sentencia DECLARACION VECTOR")
+ p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_DECLARACIONVECTORES")); p.agrega(new nodo($$[$0]));this.$ = p;
 break;
 case 22:
  console.log("Error sintactico en la linea"+(yylineno+1)); 
+break;
+case 23:
+ p = new listaenlazada(); 
+                                                                                    p.agrega(new nodo("FOR"));
+                                                                                    p.agrega(new nodo("DECLARACION"));
+                                                                                    p.agrega(new nodo($$[$0-7]));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                     p.agrega(new nodo($$[$0-6]));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                    p.agrega(new nodo($$[$0-4]));
+                                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                                    p.agrega(new nodo($$[$0-1]));
+                                                                                    this.$=p;
+break;
+case 24:
+ p = new listaenlazada(); 
+                                                                                    p.agrega(new nodo("FOR"));
+                                                                                    p.agrega(new nodo("ASIGNACION"));
+                                                                                    p.agrega(new nodo($$[$0-7]));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                     p.agrega(new nodo($$[$0-6]));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                    p.agrega(new nodo($$[$0-4]));
+                                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                                    p.agrega(new nodo($$[$0-1]));
+                                                                                    this.$=p;
+break;
+case 25:
+ p = new listaenlazada(); 
+                                                                                    p.agrega(new nodo("FOR"));
+                                                                                    p.agrega(new nodo("DECLARACION"));
+                                                                                    p.agrega(new nodo($$[$0-7]));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                     p.agrega(new nodo($$[$0-6]));
+                                                                                    p.agrega(new nodo("ASIGNACION"));
+                                                                                    p.agrega(new nodo($$[$0-4]));
+                                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                                    p.agrega(new nodo($$[$0-1]));
+                                                                                    this.$=p;
+break;
+case 26:
+ p = new listaenlazada(); 
+                                                                                    p.agrega(new nodo("FOR"));
+                                                                                    p.agrega(new nodo("ASIGNACION"));
+                                                                                    p.agrega(new nodo($$[$0-7]));
+                                                                                    p.agrega(new nodo("ETS"));
+                                                                                     p.agrega(new nodo($$[$0-6]));
+                                                                                    p.agrega(new nodo("ASIGNACION"));
+                                                                                    p.agrega(new nodo($$[$0-4]));
+                                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                                    p.agrega(new nodo($$[$0-1]));
+                                                                                    this.$=p;
+break;
+case 27:
+ p = new listaenlazada(); 
+                                                        p.agrega(new nodo("WHILE"));
+                                                        p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                        p.agrega(new nodo("ETS"));
+                                                        p.agrega(new nodo($$[$0-4]));
+                                                        p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                        p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                        p.agrega(new nodo($$[$0-1]));
+                                                        this.$=p;
+break;
+case 28:
+ p = new listaenlazada(); 
+                                                                    p.agrega(new nodo("DO"));
+                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                    p.agrega(new nodo($$[$0-6]));
+                                                                    p.agrega(new nodo("WHILE"));
+                                                                    p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                                    p.agrega(new nodo("ETS"));
+                                                                    p.agrega(new nodo($$[$0-2]));
+                                                                    p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                                    p.agrega(new nodo("PUNTO_Y_COMA"));
+                                                                    this.$=p;
+break;
+case 29:
+ p = new listaenlazada(); 
+                                                                    p.agrega(new nodo("DO"));
+                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                    p.agrega(new nodo($$[$0-6]));
+                                                                    p.agrega(new nodo("UNTIL"));
+                                                                    p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                                    p.agrega(new nodo("ETS"));
+                                                                    p.agrega(new nodo($$[$0-2]));
+                                                                    p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                                    p.agrega(new nodo("PUNTO_Y_COMA"));
+                                                                    this.$=p;
+break;
+case 30:
+ p = new listaenlazada();
+                                                                                            p.agrega(new nodo("SWITCH"));
+                                                                                            p.agrega(new nodo("VARIABLE"));
+                                                                                            p.agrega(new nodo("OPCIONES"));
+                                                                                            p.agrega(new nodo($$[$0-6]));
+                                                                                            p.agrega(new nodo("DEFAULT"));
+                                                                                            p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                                            p.agrega(new nodo($$[$0-2]));
+                                                                                            this.$=p;
+break;
+case 31:
+ p = $$[$0-1];
+                                p.agrega(new nodo("OPCION"));
+                                p.agrega(new nodo($$[$0]));
+                                this.$ = p;
+                                
+break;
+case 32:
+ p = new listaenlazada();
+                        p.agrega(new nodo("OPCION"));
+                        p.agrega(new nodo($$[$0]));
+                        this.$ = p;
+break;
+case 33:
+ p = new listaenlazada(); 
+                                                        p.agrega(new nodo("CASE"));
+                                                        p.agrega(new nodo("ETS"));
+                                                        p.agrega(new nodo($$[$0-4]));
+                                                        p.agrega(new nodo("DOS_PUNTOS"));
+                                                        p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                        p.agrega(new nodo($$[$0-1]));
+                                                        this.$ = p;
+break;
+case 36:
+ p = new listaenlazada(); 
+                                                            p.agrega(new nodo("IF"));
+                                                            p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                            p.agrega(new nodo("ETS")); 
+                                                            p.agrega(new nodo($$[$0-4])); 
+                                                            p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                            p.agrega(new nodo("ENTONCES"));
+                                                            p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                            p.agrega(new nodo($$[$0-1]));
+                                                            this.$ = p;
+break;
+case 37:
+ p = new listaenlazada(); 
+                                                                            p.agrega(new nodo("IF"));
+                                                                            p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                                            p.agrega(new nodo("ETS")); 
+                                                                            p.agrega(new nodo($$[$0-5])); 
+                                                                            p.agrega(new nodo("CIERRA_PARENTESIS"));
+                                                                            p.agrega(new nodo("BLOQUE_INSTRUCCIONES")); 
+                                                                            p.agrega(new nodo($$[$0-2]));
+                                                                            p.concatena($$[$0]);
+                                                                            this.$ = p;
+break;
+case 38:
+ p =$$[$0-7];
+                                                                        p.agrega(new nodo("ELSE_IF"));
+                                                                        p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                                        p.agrega(new nodo("ETS")); 
+                                                                        p.agrega(new nodo($$[$0-4])); 
+                                                                        p.agrega(new nodo("CIERRA_PARENTESIS_PARENTESIS"));
+                                                                        p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                        p.agrega(new nodo($$[$0-1]));
+                                                                        this.$=p;
+break;
+case 39:
+ p = $$[$0-4];
+                                                                p.agrega(new nodo("ELSE"));
+                                                                p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                p.agrega(new nodo($$[$0-1]));
+                                                                this.$=p;
+break;
+case 40:
+ p = new listaenlazada();
+                                                                    p.agrega(new nodo("ELSE_IF"));
+                                                                    p.agrega(new nodo("ABRE_PARENTESIS"));
+                                                                    p.agrega(new nodo("ETS")); 
+                                                                    p.agrega(new nodo($$[$0-4])); 
+                                                                    p.agrega(new nodo("CIERRA_PARENTESIS_PARENTESIS"));
+                                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                                    p.agrega(new nodo($$[$0-1]));
+                                                                    this.$=p;
+break;
+case 41:
+p = new listaenlazada();
+                                                    p.agrega(new nodo("ELSE"));
+                                                    p.agrega(new nodo("BLOQUE_INSTRUCCIONES"));
+                                                    p.agrega(new nodo($$[$0-1]));
+                                                    this.$=p;
 break;
 case 42:
  p = new listaenlazada(); 
