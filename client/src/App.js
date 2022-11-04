@@ -44,6 +44,9 @@ import PostForm2 from './components/PostForm2'
 class App extends Component {
 	render() {
 		return (
+
+      
+
 			<div className="App">
 				<PostForm />
 				{/* <PostList /> */}

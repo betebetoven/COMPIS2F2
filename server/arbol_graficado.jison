@@ -94,6 +94,9 @@ cadenita "'" [^']* "'"
 "tostring" return 'pr_TS'
 "tochararray" return 'pr_TCA'
 "new" return 'pr_new'
+"push" return 'pr_push'
+"pop" return 'pr_pop'
+"run" return 'pr_run'
 
 
 
@@ -125,6 +128,8 @@ cadenita "'" [^']* "'"
 //"!=" return '!='
 "[" return '['
 "]" return ']'
+"." return '.'
+
 
 
 
@@ -193,6 +198,9 @@ INSTRUCCION : DECLARACION   { p = new listaenlazada(); p.agrega(new nodo("INSTRU
             | SWITCH        { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_SWITCH")); p.agrega(new nodo($1));$$ = p;}
             | BREAK         { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_BREAK")); $$ = p;}
             | CONTINUE      { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_CONTINUE")); $$ = p;}
+            | PUSH          { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_PUSH")); p.agrega(new nodo($1));$$ = p;}
+            | POP          { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_POP")); p.agrega(new nodo($1));$$ = p;}
+            | RUN          { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_RUN")); p.agrega(new nodo($1));$$ = p;}
             | AUMENTO ';'   { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_AUMENTO")); p.agrega(new nodo($1));$$ = p;}
             | INSTANCIA ';' { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_INSTANCIA")); p.agrega(new nodo($1));$$ = p;}
             |DECLARACION_VECTORES { p = new listaenlazada(); p.agrega(new nodo("INSTRUCCION_DECLARACIONVECTORES")); p.agrega(new nodo($1));$$ = p;}
@@ -612,10 +620,22 @@ RETURN : 'pr_return' '(' ETS ')' ';'{ p = new listaenlazada();
 
 
 
+POP: 'id' '.' 'pr_pop' '(' ')' ';' { p = new listaenlazada(); 
+                                p.agrega(new nodo("VARIABLE"));
+                                p.agrega(new nodo("POP")); 
+                                p.agrega(new nodo("ABRE_PARENTESIS")); 
+                                p.agrega(new nodo("CIERRA_PARENTESIS")); 
+                                $$ = p;}
+;
 
 
-
-
+PUSH: 'id' '.' 'pr_push' ETS ';' { p = new listaenlazada(); 
+                                p.agrega(new nodo("VARIABLE"));
+                                p.agrega(new nodo("PUSH")); 
+                                p.agrega(new nodo("ETS")); 
+                                p.agrega(new nodo($4)); 
+                                $$ = p;}
+;
 
 
 //LLAMADA DE FUNCION O METODOS
@@ -630,6 +650,13 @@ CALL:  'id' PARAMETROSLL { p = new listaenlazada();
                                 p.agrega(new nodo("CIERRA PARENTESIS"));
                                 $$ = p;}
 
+;
+
+RUN: 'pr_run' CALL ';' { p = new listaenlazada(); 
+                                p.agrega(new nodo("RUN"));
+                                p.agrega(new nodo("CALL")); 
+                                p.agrega(new nodo($2));
+                                $$ = p;}
 ;
 
 

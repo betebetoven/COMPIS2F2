@@ -17,6 +17,7 @@
     const { Relacional } = require("./expresiones/relacional.js");
     const {DeclaracionARRAY} = require('./instrucciones/declaracionarray.js');
     const {imprimir} = require('./instrucciones/imprimir.js');
+    const {consola} = require("./patron_singleton/singleton.js");
     var array_erroresLexicos;
    
 %}
@@ -141,6 +142,7 @@ cadenita "'" [^']* "'"
 
 .   { 
         console.log("error lexico :"+yytext)
+        consola.cons+="error lexico :"+yytext+"  en la linea  "+(yylineno+1);
         //push para array errores
     }
 
@@ -187,7 +189,8 @@ INSTRUCCION : DECLARACION   {$$=$1; console.log("reconocio declaracion ") }
             | AUMENTO ';'   {$$=$1;console.log("reconocio sentencia AUMENTO")}
             | INSTANCIA ';'   {$$=$1;console.log("reconocio sentencia INSTANCIA")}
             |DECLARACION_VECTORES {$$=$1;console.log("reconocio sentencia DECLARACION VECTOR")}
-            | error    ';'  { console.log("Error sintactico en la linea"+(yylineno+1)); }
+            | error    ';'  { console.log("Error sintactico en la linea"+(yylineno+1));
+                                consola.cons+="\nERROR: Error sintactico en la linea"+(yylineno+1)+"\n" }
 ;
 //INSTRUCCIONES CICLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOS
 CICLO: 'pr_for'  '(' DECLARACION ETS ';'  ETS ')' '{' INSTRUCCIONES '}'  {}
